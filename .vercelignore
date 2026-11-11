@@ -6,3 +6,23 @@ extracted_chat/
 .github
 node_modules
 .gemini
+
+# Ignore loose heavy build artifacts in root directory only
+/*_*.html
+/Plano_de_Gestao_*.html
+/Plano_de_Gestao_*.pdf
+/*.jpeg
+/*.jpg
+/card_*.png
+/flyer_*.png
+/page_*.png
+/cutout_*.png
+/tight_*.png
+/pure_*.png
+/angela_*.png
+/kenia_*.png
+/rene_*.png
+/vanessa_*.png
+/claubevanio_*.png
+/crop_*.png
+/logo_*.png

@@ -1092,8 +1092,8 @@ button {
   min-width: 44px;
   min-height: 44px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(255, 199, 44, 0.12) 0%, rgba(2, 28, 14, 0.85) 100%);
-  border: 1.5px solid rgba(255, 199, 44, 0.45);
+  background: linear-gradient(135deg, rgba(2, 38, 18, 0.95) 0%, rgba(1, 20, 10, 0.98) 100%);
+  border: 2px solid var(--color-gold);
   color: var(--color-gold);
   display: inline-flex;
   align-items: center;
@@ -1105,9 +1105,11 @@ button {
   transition: all var(--transition-fast);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 199, 44, 0.25);
   outline: none;
   position: relative;
+  opacity: 1 !important;
+  pointer-events: auto !important;
 }
 
 .btn-carousel-nav .carousel-nav-icon {
@@ -1115,34 +1117,26 @@ button {
   height: 20px;
   display: block;
   stroke: currentColor;
-  stroke-width: 2.6;
+  stroke-width: 2.8;
   stroke-linecap: round;
   stroke-linejoin: round;
   transition: transform var(--transition-fast);
   flex-shrink: 0;
+  pointer-events: none;
 }
 
-.btn-carousel-nav:hover:not(:disabled) {
+.btn-carousel-nav:hover {
   background: linear-gradient(180deg, #FBE06B 0%, #E8A825 50%, #C9820A 100%);
   color: #021a0c;
   border-color: #ffffff;
-  transform: scale(1.06);
-  box-shadow: 0 6px 20px rgba(232, 168, 37, 0.55), 0 0 14px rgba(255, 199, 44, 0.4);
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(232, 168, 37, 0.65), 0 0 16px rgba(255, 199, 44, 0.4);
 }
 
-.btn-carousel-nav:active:not(:disabled) {
-  transform: scale(0.95);
+.btn-carousel-nav:active {
+  transform: scale(0.94);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
-
-.btn-carousel-nav:disabled {
-  opacity: 0.22;
-  cursor: not-allowed;
-  pointer-events: none;
-  border-color: rgba(255, 255, 255, 0.15);
-  color: rgba(255, 255, 255, 0.25);
-  box-shadow: none;
-  transform: none;
 }
 
 .carousel-track-container {
@@ -1428,63 +1422,67 @@ button {
 
 .btn-card-action {
   min-height: 42px;
-  padding: 9px 12px;
+  padding: 8px 10px;
   border-radius: var(--radius-pill);
   font-family: var(--font-heading);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 800;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 7px;
+  gap: 6px;
   text-decoration: none;
   cursor: pointer;
   transition: all var(--transition-fast);
   text-align: center;
   line-height: 1;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.4);
   outline: none;
   box-sizing: border-box;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
 }
 
-/* Download Button: Gold Glassmorphism */
+/* Download Button: Luxury Solid Gold Gradient */
 .btn-card-download {
-  background: rgba(255, 199, 44, 0.12);
-  border: 1.5px solid var(--color-gold);
-  color: var(--color-gold);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(180deg, #FBE06B 0%, #E8A825 50%, #C9820A 100%);
+  color: #021a0c;
+  border: 1px solid #ffffff;
+  box-shadow: 0 3px 12px rgba(232, 168, 37, 0.35);
 }
 
 .btn-card-download:hover {
-  background: linear-gradient(180deg, #FBE06B 0%, #E8A825 100%);
-  color: #021a0c;
-  border-color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(255, 199, 44, 0.45);
-}
-
-/* WhatsApp Share Button: Authentic WhatsApp Green Glow */
-.btn-card-share {
-  background: linear-gradient(135deg, rgba(37, 211, 102, 0.15) 0%, rgba(18, 140, 126, 0.28) 100%);
-  border: 1.5px solid #25D366;
-  color: #25D366;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-.btn-card-share:hover {
-  background: #25D366;
+  background: linear-gradient(180deg, #ffffff 0%, #FBE06B 50%, #E8A825 100%);
   color: #01160b;
   border-color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.5);
+  box-shadow: 0 5px 18px rgba(232, 168, 37, 0.6);
+}
+
+/* WhatsApp Share Button: Vibrant Solid WhatsApp Green Pill */
+.btn-card-share {
+  background: linear-gradient(180deg, #2fe574 0%, #25D366 50%, #1ea952 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 3px 12px rgba(37, 211, 102, 0.35);
+}
+
+.btn-card-share:hover {
+  background: linear-gradient(180deg, #51f592 0%, #2ce273 50%, #198741 100%);
+  color: #ffffff;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 18px rgba(37, 211, 102, 0.6);
 }
 
 .btn-card-action:active {
-  transform: translateY(0) scale(0.97);
+  transform: translateY(0) scale(0.96);
 }
 
 .btn-card-action svg {
   flex-shrink: 0;
+  width: 15px;
+  height: 15px;
 }
 
 @media (max-width: 360px) {
@@ -1492,9 +1490,10 @@ button {
     gap: 6px;
   }
   .btn-card-action {
-    font-size: 0.74rem;
-    padding: 8px 6px;
+    font-size: 0.72rem;
+    padding: 7px 4px;
     gap: 4px;
+    letter-spacing: 0.2px;
   }
   .btn-card-action svg {
     width: 13px;

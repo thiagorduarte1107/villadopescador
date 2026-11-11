@@ -414,7 +414,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const dots = dotsContainer ? Array.from(dotsContainer.querySelectorAll('.carousel-dot')) : [];
     const totalSlides = slides.length;
     let currentIndex = 0;
-    let isScrolling = false;
+    let isProgrammatic = false;
+    let programmaticTimer = null;
 
     if (counter) {
       const totalEl = counter.querySelector('.carousel-total');
@@ -422,17 +423,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateControls() {
-      // Update counter
+      // Update counter badge
       if (counter) {
         const curEl = counter.querySelector('.carousel-current');
         if (curEl) curEl.textContent = currentIndex + 1;
       }
 
-      // Update Prev / Next buttons
-      if (btnPrev) btnPrev.disabled = (currentIndex === 0);
-      if (btnNext) btnNext.disabled = (currentIndex === totalSlides - 1);
-
-      // Update dots
+      // Update dots indicator
       dots.forEach((dot, idx) => {
         if (idx === currentIndex) {
           dot.classList.add('active');
@@ -444,60 +441,85 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    function goToSlide(index) {
-      if (index < 0) index = 0;
-      if (index >= totalSlides) index = totalSlides - 1;
+    function scrollToSlideIndex(index) {
+      // Loop seamlessly so carousels never lock up or get stuck
+      if (index < 0) {
+        index = totalSlides - 1;
+      } else if (index >= totalSlides) {
+        index = 0;
+      }
+
       currentIndex = index;
+      updateControls();
 
       const targetSlide = slides[currentIndex];
       if (targetSlide) {
-        targetSlide.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
-      }
+        isProgrammatic = true;
+        if (programmaticTimer) clearTimeout(programmaticTimer);
 
-      updateControls();
+        const firstSlide = slides[0];
+        const baseOffset = firstSlide ? firstSlide.offsetLeft : 0;
+        const targetScrollLeft = targetSlide.offsetLeft - baseOffset;
+
+        track.scrollTo({
+          left: Math.max(0, targetScrollLeft),
+          behavior: 'smooth'
+        });
+
+        programmaticTimer = setTimeout(() => {
+          isProgrammatic = false;
+        }, 650);
+      }
     }
 
     if (btnPrev) {
-      btnPrev.addEventListener('click', () => {
-        goToSlide(currentIndex - 1);
+      btnPrev.disabled = false;
+      btnPrev.removeAttribute('disabled');
+      btnPrev.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        scrollToSlideIndex(currentIndex - 1);
       });
     }
 
     if (btnNext) {
-      btnNext.addEventListener('click', () => {
-        goToSlide(currentIndex + 1);
+      btnNext.disabled = false;
+      btnNext.removeAttribute('disabled');
+      btnNext.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        scrollToSlideIndex(currentIndex + 1);
       });
     }
 
     dots.forEach((dot, idx) => {
-      dot.addEventListener('click', () => {
-        goToSlide(idx);
+      dot.addEventListener('click', (e) => {
+        e.preventDefault();
+        scrollToSlideIndex(idx);
       });
     });
 
-    // Sync active slide on native touch swipe or scroll snap
+    // Sync active slide on native touch swipe or user scroll
     let scrollTimeout = null;
     track.addEventListener('scroll', () => {
+      if (isProgrammatic) return;
+
       if (scrollTimeout) cancelAnimationFrame(scrollTimeout);
       scrollTimeout = requestAnimationFrame(() => {
         const scrollLeft = track.scrollLeft;
-        const maxScroll = track.scrollWidth - track.clientWidth;
+        const firstOffset = slides[0] ? slides[0].offsetLeft : 0;
 
         let closestIndex = 0;
-        if (maxScroll > 0 && scrollLeft >= maxScroll - 20) {
-          closestIndex = totalSlides - 1;
-        } else if (scrollLeft <= 20) {
-          closestIndex = 0;
-        } else {
-          let minDiff = Infinity;
-          slides.forEach((slide, idx) => {
-            const diff = Math.abs((slide.offsetLeft - track.offsetLeft) - scrollLeft);
-            if (diff < minDiff) {
-              minDiff = diff;
-              closestIndex = idx;
-            }
-          });
-        }
+        let minDiff = Infinity;
+
+        slides.forEach((slide, idx) => {
+          const slideScrollPos = slide.offsetLeft - firstOffset;
+          const diff = Math.abs(slideScrollPos - scrollLeft);
+          if (diff < minDiff) {
+            minDiff = diff;
+            closestIndex = idx;
+          }
+        });
 
         if (closestIndex !== currentIndex) {
           currentIndex = closestIndex;
@@ -510,10 +532,10 @@ document.addEventListener('DOMContentLoaded', () => {
     track.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight') {
         e.preventDefault();
-        goToSlide(currentIndex + 1);
+        scrollToSlideIndex(currentIndex + 1);
       } else if (e.key === 'ArrowLeft') {
         e.preventDefault();
-        goToSlide(currentIndex - 1);
+        scrollToSlideIndex(currentIndex - 1);
       }
     });
 

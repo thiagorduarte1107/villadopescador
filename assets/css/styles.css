@@ -1414,6 +1414,94 @@ button {
   font-weight: 900;
 }
 
+/* ==========================================================================
+   STANDARDIZED DUAL ACTION BUTTONS (Baixar & WhatsApp)
+   ========================================================================== */
+.card-action-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 14px;
+}
+
+.btn-card-action {
+  min-height: 42px;
+  padding: 9px 12px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: center;
+  line-height: 1;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* Download Button: Gold Glassmorphism */
+.btn-card-download {
+  background: rgba(255, 199, 44, 0.12);
+  border: 1.5px solid var(--color-gold);
+  color: var(--color-gold);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn-card-download:hover {
+  background: linear-gradient(180deg, #FBE06B 0%, #E8A825 100%);
+  color: #021a0c;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(255, 199, 44, 0.45);
+}
+
+/* WhatsApp Share Button: Authentic WhatsApp Green Glow */
+.btn-card-share {
+  background: linear-gradient(135deg, rgba(37, 211, 102, 0.15) 0%, rgba(18, 140, 126, 0.28) 100%);
+  border: 1.5px solid #25D366;
+  color: #25D366;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn-card-share:hover {
+  background: #25D366;
+  color: #01160b;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.5);
+}
+
+.btn-card-action:active {
+  transform: translateY(0) scale(0.97);
+}
+
+.btn-card-action svg {
+  flex-shrink: 0;
+}
+
+@media (max-width: 360px) {
+  .card-action-buttons {
+    gap: 6px;
+  }
+  .btn-card-action {
+    font-size: 0.74rem;
+    padding: 8px 6px;
+    gap: 4px;
+  }
+  .btn-card-action svg {
+    width: 13px;
+    height: 13px;
+  }
+}
+
 .btn-view-card {
   display: inline-flex;
   align-items: center;

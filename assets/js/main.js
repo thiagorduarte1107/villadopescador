@@ -330,6 +330,44 @@ document.addEventListener('DOMContentLoaded', () => {
     window.open(waUrl, '_blank');
   }
 
+  // Direct WhatsApp Share Handler for each Card
+  document.querySelectorAll('.btn-card-share').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const title = btn.dataset.shareTitle || 'CHAPA 2 • NOVA VISÃO';
+      const text = btn.dataset.shareText || 'Confira os projetos e a equipe da CHAPA 2 para o Condomínio Villa do Pescador:';
+      const campaignUrl = getCampaignShareUrl();
+
+      const waMsg = encodeURIComponent(
+        `*${title}*\n\n` +
+        `${text}\n\n` +
+        `📲 Veja todos os detalhes e o Plano de Gestão Oficial:\n${campaignUrl}`
+      );
+
+      const waUrl = `https://api.whatsapp.com/send?text=${waMsg}`;
+      window.open(waUrl, '_blank');
+      showToast('Abrindo WhatsApp...');
+    });
+  });
+
+  // Modal WhatsApp button
+  const modalShareWaBtn = document.getElementById('modalShareWaBtn');
+  if (modalShareWaBtn) {
+    modalShareWaBtn.addEventListener('click', () => {
+      const title = modalTitle?.textContent || 'CHAPA 2 • NOVA VISÃO';
+      const campaignUrl = getCampaignShareUrl();
+      const waMsg = encodeURIComponent(
+        `*${title}*\n` +
+        `Confira este material oficial da CHAPA 2 • NOVA VISÃO para o Condomínio Villa do Pescador:\n${campaignUrl}`
+      );
+      const waUrl = `https://api.whatsapp.com/send?text=${waMsg}`;
+      window.open(waUrl, '_blank');
+      showToast('Abrindo WhatsApp...');
+    });
+  }
+
   // ==========================================
   // 7. TOAST NOTIFICATION UTILITY
   // ==========================================

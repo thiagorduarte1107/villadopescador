@@ -12,3 +12,7 @@ audit_responsive.py
 test_share_fallbacks.py
 validate_share.py
 nul
+
+# Nao enviar ao deploy: pacote/serve so sao usados localmente (npx serve)
+package.json
+serve.json

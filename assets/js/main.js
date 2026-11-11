@@ -489,6 +489,16 @@ document.addEventListener('DOMContentLoaded', () => {
     counterId: 'teamCarouselCounter'
   });
 
+  // Initialize Flyers Carousel (8 Flyers)
+  initModernCarousel({
+    wrapperId: 'flyersCarouselWrapper',
+    trackId: 'flyersCarouselTrack',
+    prevBtnId: 'btnFlyerPrev',
+    nextBtnId: 'btnFlyerNext',
+    dotsId: 'flyersCarouselDots',
+    counterId: 'flyersCarouselCounter'
+  });
+
   // Initial call to set active page 1
   updatePdfViewer(1);
 });

@@ -1201,14 +1201,16 @@ button {
 }
 
 .carousel-slide .member-card,
-.carousel-slide .proposal-card {
+.carousel-slide .proposal-card,
+.carousel-slide .flyer-card {
   height: 100%;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-.carousel-slide .proposal-card-body {
+.carousel-slide .proposal-card-body,
+.carousel-slide .flyer-card-body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1648,7 +1650,148 @@ button {
 }
 
 /* ==========================================================================
-   MEDIA GALLERY (CARDS & FLYERS)
+   FLYERS CAROUSEL COMPONENT (Padronizado)
+   ========================================================================== */
+.carousel-slide.flyer-slide {
+  flex: 0 0 78%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 380px) {
+  .carousel-slide.flyer-slide {
+    flex: 0 0 85%;
+  }
+}
+
+@media (min-width: 640px) {
+  .carousel-slide.flyer-slide {
+    flex: 0 0 calc(50% - 10px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .carousel-slide.flyer-slide {
+    flex: 0 0 calc(25% - 15px);
+  }
+}
+
+.flyer-card {
+  background: linear-gradient(180deg, rgba(3, 30, 15, 0.85) 0%, rgba(1, 15, 7, 0.95) 100%);
+  border: 1.5px solid var(--color-border-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.flyer-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-gold);
+  box-shadow: var(--shadow-gold);
+}
+
+.flyer-card-thumb-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  background: #011208;
+  cursor: pointer;
+}
+
+.flyer-card-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-smooth);
+}
+
+.flyer-card:hover .flyer-card-thumb {
+  transform: scale(1.04);
+}
+
+.flyer-card-body {
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.flyer-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.flyer-num-pill {
+  font-family: var(--font-heading);
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: var(--color-gold);
+  background: rgba(255, 199, 44, 0.12);
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 199, 44, 0.35);
+}
+
+.flyer-ratio-pill {
+  font-size: 0.72rem;
+  color: var(--color-emerald);
+  font-weight: 700;
+}
+
+.flyer-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+
+.flyer-desc {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin-bottom: 16px;
+  flex: 1;
+}
+
+.btn-open-flyer-card {
+  width: 100%;
+  min-height: 44px;
+  background: rgba(255, 199, 44, 0.12);
+  border: 1.5px solid var(--color-gold);
+  color: var(--color-gold);
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 0.86rem;
+  padding: 11px 16px;
+  border-radius: var(--radius-pill);
+  transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.btn-open-flyer-card:hover {
+  background: var(--color-gold);
+  color: #021a0c;
+  box-shadow: 0 4px 16px rgba(255, 199, 44, 0.4);
+}
+
+/* ==========================================================================
+   MEDIA GALLERY (LEGACY / FALLBACK)
    ========================================================================== */
 .gallery-filter-tabs {
   display: flex;

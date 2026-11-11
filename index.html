@@ -755,102 +755,230 @@
         </p>
       </div>
 
-      <!-- Gallery Grid (8 Unique Vertical Flyers) -->
-      <div class="gallery-grid" id="galleryGrid">
-        <!-- Flyer 1 -->
-        <div class="gallery-card-item" data-category="flyers" data-modal-title="Flyer 1: Minimercado Autônomo 24h" data-modal-src="assets/images/flyers/flyer_1_minimercado.webp" data-modal-download="assets/images/flyers/flyer_1_minimercado.png">
-          <div class="gallery-thumb-container ratio-stories">
-            <img src="assets/images/flyers/flyer_1_minimercado.webp" alt="Flyer Minimercado 24h" class="gallery-thumb-img" loading="lazy">
-            <span class="gallery-badge-overlay">Flyer 01</span>
+      <!-- Carousel Container: Flyers Oficiais -->
+      <div class="carousel-wrapper" id="flyersCarouselWrapper" role="region" aria-roledescription="carousel" aria-label="Carrossel de Flyers Oficiais da Chapa 2">
+        <!-- Carousel Control Header -->
+        <div class="carousel-top-bar">
+          <div class="carousel-counter-badge" id="flyersCarouselCounter">
+            <span>Flyer</span>
+            <strong class="carousel-current">1</strong>
+            <span>de</span>
+            <strong class="carousel-total">8</strong>
           </div>
-          <div class="gallery-caption">
-            <div class="gallery-item-title">Minimercado 24h</div>
-            <div class="gallery-item-sub">Status &amp; Stories WhatsApp</div>
+
+          <div class="carousel-nav-arrows">
+            <button type="button" class="btn-carousel-nav" id="btnFlyerPrev" aria-label="Flyer Anterior" disabled>
+              <svg class="carousel-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <button type="button" class="btn-carousel-nav" id="btnFlyerNext" aria-label="Próximo Flyer">
+              <svg class="carousel-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
           </div>
         </div>
 
-        <!-- Flyer 2 -->
-        <div class="gallery-card-item" data-category="flyers" data-modal-title="Flyer 2: Baias de Lazer Náutico" data-modal-src="assets/images/flyers/flyer_2_baias_lazer.webp" data-modal-download="assets/images/flyers/flyer_2_baias_lazer.png">
-          <div class="gallery-thumb-container ratio-stories">
-            <img src="assets/images/flyers/flyer_2_baias_lazer.webp" alt="Flyer Baias de Lazer" class="gallery-thumb-img" loading="lazy">
-            <span class="gallery-badge-overlay">Flyer 02</span>
-          </div>
-          <div class="gallery-caption">
-            <div class="gallery-item-title">Baias de Lazer Náutico</div>
-            <div class="gallery-item-sub">Status &amp; Stories WhatsApp</div>
+        <!-- Carousel Track Viewport -->
+        <div class="carousel-track-container">
+          <div class="carousel-track" id="flyersCarouselTrack" tabindex="0" aria-label="Lista de flyers verticais da Chapa 2">
+            <!-- 1. Minimercado -->
+            <div class="carousel-slide flyer-slide" data-slide-index="1">
+              <div class="flyer-card">
+                <div class="flyer-card-thumb-wrap" data-modal-title="Flyer 1: Minimercado Autônomo 24h" data-modal-src="assets/images/flyers/flyer_1_minimercado.webp" data-modal-download="assets/images/flyers/flyer_1_minimercado.png">
+                  <img src="assets/images/flyers/flyer_1_minimercado.webp" alt="Flyer Minimercado 24h" class="flyer-card-thumb" loading="lazy">
+                  <span class="proposal-tag-badge">📱 STORIES &amp; STATUS</span>
+                </div>
+                <div class="flyer-card-body">
+                  <div class="flyer-card-meta">
+                    <span class="flyer-num-pill">Flyer 01</span>
+                    <span class="flyer-ratio-pill">9:16 HD</span>
+                  </div>
+                  <h3 class="flyer-title">Minimercado Autônomo 24h</h3>
+                  <p class="flyer-desc">
+                    Formato vertical em alta definição otimizado para status do WhatsApp, stories do Instagram e compartilhamento com vizinhos.
+                  </p>
+                  <button type="button" class="btn-open-flyer-card" data-modal-title="Flyer 1: Minimercado Autônomo 24h" data-modal-src="assets/images/flyers/flyer_1_minimercado.webp" data-modal-download="assets/images/flyers/flyer_1_minimercado.png">
+                    🔍 Ampliar &amp; Baixar Flyer
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Baias de Lazer -->
+            <div class="carousel-slide flyer-slide" data-slide-index="2">
+              <div class="flyer-card">
+                <div class="flyer-card-thumb-wrap" data-modal-title="Flyer 2: Baias de Lazer Náutico" data-modal-src="assets/images/flyers/flyer_2_baias_lazer.webp" data-modal-download="assets/images/flyers/flyer_2_baias_lazer.png">
+                  <img src="assets/images/flyers/flyer_2_baias_lazer.webp" alt="Flyer Baias de Lazer" class="flyer-card-thumb" loading="lazy">
+                  <span class="proposal-tag-badge">📱 STORIES &amp; STATUS</span>
+                </div>
+                <div class="flyer-card-body">
+                  <div class="flyer-card-meta">
+                    <span class="flyer-num-pill">Flyer 02</span>
+                    <span class="flyer-ratio-pill">9:16 HD</span>
+                  </div>
+                  <h3 class="flyer-title">Baias de Lazer Náutico</h3>
+                  <p class="flyer-desc">
+                    Quiosques gourmet voltados para o lago, comodidade para famílias e eventos com privacidade e organização.
+                  </p>
+                  <button type="button" class="btn-open-flyer-card" data-modal-title="Flyer 2: Baias de Lazer Náutico" data-modal-src="assets/images/flyers/flyer_2_baias_lazer.webp" data-modal-download="assets/images/flyers/flyer_2_baias_lazer.png">
+                    🔍 Ampliar &amp; Baixar Flyer
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Recicla Villa -->
+            <div class="carousel-slide flyer-slide" data-slide-index="3">
+              <div class="flyer-card">
+                <div class="flyer-card-thumb-wrap" data-modal-title="Flyer 3: Recicla Villa" data-modal-src="assets/images/flyers/flyer_3_recicla_villa.webp" data-modal-download="assets/images/flyers/flyer_3_recicla_villa.png">
+                  <img src="assets/images/flyers/flyer_3_recicla_villa.webp" alt="Flyer Recicla Villa" class="flyer-card-thumb" loading="lazy">
+                  <span class="proposal-tag-badge">📱 STORIES &amp; STATUS</span>
+                </div>
+                <div class="flyer-card-body">
+                  <div class="flyer-card-meta">
+                    <span class="flyer-num-pill">Flyer 03</span>
+                    <span class="flyer-ratio-pill">9:16 HD</span>
+                  </div>
+                  <h3 class="flyer-title">Recicla Villa Sustentável</h3>
+                  <p class="flyer-desc">
+                    Economia circular com pagamento direto de R$ 3,00 por quilo entregue ao morador e destinação sustentável de resíduos.
+                  </p>
+                  <button type="button" class="btn-open-flyer-card" data-modal-title="Flyer 3: Recicla Villa" data-modal-src="assets/images/flyers/flyer_3_recicla_villa.webp" data-modal-download="assets/images/flyers/flyer_3_recicla_villa.png">
+                    🔍 Ampliar &amp; Baixar Flyer
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. Plano de Governo -->
+            <div class="carousel-slide flyer-slide" data-slide-index="4">
+              <div class="flyer-card">
+                <div class="flyer-card-thumb-wrap" data-modal-title="Flyer 4: Plano de Governo &amp; Gestão" data-modal-src="assets/images/flyers/flyer_4_plano_governo.webp" data-modal-download="assets/images/flyers/flyer_4_plano_governo.png">
+                  <img src="assets/images/flyers/flyer_4_plano_governo.webp" alt="Flyer Plano de Governo" class="flyer-card-thumb" loading="lazy">
+                  <span class="proposal-tag-badge">📱 STORIES &amp; STATUS</span>
+                </div>
+                <div class="flyer-card-body">
+                  <div class="flyer-card-meta">
+                    <span class="flyer-num-pill">Flyer 04</span>
+                    <span class="flyer-ratio-pill">9:16 HD</span>
+                  </div>
+                  <h3 class="flyer-title">Plano de Governo &amp; Gestão</h3>
+                  <p class="flyer-desc">
+                    Diretrizes estratégicas com cronograma físico, orçamentário e metas reais para valorização de todas as unidades.
+                  </p>
+                  <button type="button" class="btn-open-flyer-card" data-modal-title="Flyer 4: Plano de Governo &amp; Gestão" data-modal-src="assets/images/flyers/flyer_4_plano_governo.webp" data-modal-download="assets/images/flyers/flyer_4_plano_governo.png">
+                    🔍 Ampliar &amp; Baixar Flyer
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. Guarda-Barcos -->
+            <div class="carousel-slide flyer-slide" data-slide-index="5">
+              <div class="flyer-card">
+                <div class="flyer-card-thumb-wrap" data-modal-title="Flyer 5: Guarda-Barcos Estruturado" data-modal-src="assets/images/flyers/flyer_5_guarda_barcos.webp" data-modal-download="assets/images/flyers/flyer_5_guarda_barcos.png">
+                  <img src="assets/images/flyers/flyer_5_guarda_barcos.webp" alt="Flyer Guarda-Barcos" class="flyer-card-thumb" loading="lazy">
+                  <span class="proposal-tag-badge">📱 STORIES &amp; STATUS</span>
+                </div>
+                <div class="flyer-card-body">
+                  <div class="flyer-card-meta">
+                    <span class="flyer-num-pill">Flyer 05</span>
+                    <span class="flyer-ratio-pill">9:16 HD</span>
+                  </div>
+                  <h3 class="flyer-title">Guarda-Barcos Seguro &amp; Lava-Jato</h3>
+                  <p class="flyer-desc">
+                    Espaço fechado e monitorado 24 horas para embarcações e jet-skis com ponto de água tratada para higienização rápida.
+                  </p>
+                  <button type="button" class="btn-open-flyer-card" data-modal-title="Flyer 5: Guarda-Barcos Estruturado" data-modal-src="assets/images/flyers/flyer_5_guarda_barcos.webp" data-modal-download="assets/images/flyers/flyer_5_guarda_barcos.png">
+                    🔍 Ampliar &amp; Baixar Flyer
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6. Acessibilidade -->
+            <div class="carousel-slide flyer-slide" data-slide-index="6">
+              <div class="flyer-card">
+                <div class="flyer-card-thumb-wrap" data-modal-title="Flyer 6: Acessibilidade &amp; Espaço TEA" data-modal-src="assets/images/flyers/flyer_6_acessibilidade.webp" data-modal-download="assets/images/flyers/flyer_6_acessibilidade.png">
+                  <img src="assets/images/flyers/flyer_6_acessibilidade.webp" alt="Flyer Acessibilidade" class="flyer-card-thumb" loading="lazy">
+                  <span class="proposal-tag-badge">📱 STORIES &amp; STATUS</span>
+                </div>
+                <div class="flyer-card-body">
+                  <div class="flyer-card-meta">
+                    <span class="flyer-num-pill">Flyer 06</span>
+                    <span class="flyer-ratio-pill">9:16 HD</span>
+                  </div>
+                  <h3 class="flyer-title">Acessibilidade &amp; Espaço TEA</h3>
+                  <p class="flyer-desc">
+                    Inclusão real com rampas NBR 9050, acessos suaves e ambiente sensorial calmo para acolhimento de pessoas com autismo.
+                  </p>
+                  <button type="button" class="btn-open-flyer-card" data-modal-title="Flyer 6: Acessibilidade &amp; Espaço TEA" data-modal-src="assets/images/flyers/flyer_6_acessibilidade.webp" data-modal-download="assets/images/flyers/flyer_6_acessibilidade.png">
+                    🔍 Ampliar &amp; Baixar Flyer
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 7. Equipe Chapa 2 -->
+            <div class="carousel-slide flyer-slide" data-slide-index="7">
+              <div class="flyer-card">
+                <div class="flyer-card-thumb-wrap" data-modal-title="Flyer 7: Equipe Completa CHAPA 2" data-modal-src="assets/images/flyers/flyer_7_equipe_chapa2.webp" data-modal-download="assets/images/flyers/flyer_7_equipe_chapa2.png">
+                  <img src="assets/images/flyers/flyer_7_equipe_chapa2.webp" alt="Flyer Equipe CHAPA 2" class="flyer-card-thumb" loading="lazy">
+                  <span class="proposal-tag-badge">📱 STORIES &amp; STATUS</span>
+                </div>
+                <div class="flyer-card-body">
+                  <div class="flyer-card-meta">
+                    <span class="flyer-num-pill">Flyer 07</span>
+                    <span class="flyer-ratio-pill">9:16 HD</span>
+                  </div>
+                  <h3 class="flyer-title">Equipe Completa CHAPA 2</h3>
+                  <p class="flyer-desc">
+                    Apresentação oficial de todos os integrantes da diretoria, conselho fiscal e suplência unidos pela Nova Visão.
+                  </p>
+                  <button type="button" class="btn-open-flyer-card" data-modal-title="Flyer 7: Equipe Completa CHAPA 2" data-modal-src="assets/images/flyers/flyer_7_equipe_chapa2.webp" data-modal-download="assets/images/flyers/flyer_7_equipe_chapa2.png">
+                    🔍 Ampliar &amp; Baixar Flyer
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 8. Compromisso Financeiro -->
+            <div class="carousel-slide flyer-slide" data-slide-index="8">
+              <div class="flyer-card">
+                <div class="flyer-card-thumb-wrap" data-modal-title="Flyer 8: Compromisso Financeiro &amp; Compliance" data-modal-src="assets/images/flyers/flyer_8_compromisso_financeiro.webp" data-modal-download="assets/images/flyers/flyer_8_compromisso_financeiro.png">
+                  <img src="assets/images/flyers/flyer_8_compromisso_financeiro.webp" alt="Flyer Compromisso Financeiro" class="flyer-card-thumb" loading="lazy">
+                  <span class="proposal-tag-badge">📱 STORIES &amp; STATUS</span>
+                </div>
+                <div class="flyer-card-body">
+                  <div class="flyer-card-meta">
+                    <span class="flyer-num-pill">Flyer 08</span>
+                    <span class="flyer-ratio-pill">9:16 HD</span>
+                  </div>
+                  <h3 class="flyer-title">Compromisso Financeiro &amp; Gestão</h3>
+                  <p class="flyer-desc">
+                    Tríplice cotação obrigatória para cada despesa, prestação de contas mensal transparente e combate a aumento abusivo de taxas.
+                  </p>
+                  <button type="button" class="btn-open-flyer-card" data-modal-title="Flyer 8: Compromisso Financeiro &amp; Compliance" data-modal-src="assets/images/flyers/flyer_8_compromisso_financeiro.webp" data-modal-download="assets/images/flyers/flyer_8_compromisso_financeiro.png">
+                    🔍 Ampliar &amp; Baixar Flyer
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- Flyer 3 -->
-        <div class="gallery-card-item" data-category="flyers" data-modal-title="Flyer 3: Recicla Villa" data-modal-src="assets/images/flyers/flyer_3_recicla_villa.webp" data-modal-download="assets/images/flyers/flyer_3_recicla_villa.png">
-          <div class="gallery-thumb-container ratio-stories">
-            <img src="assets/images/flyers/flyer_3_recicla_villa.webp" alt="Flyer Recicla Villa" class="gallery-thumb-img" loading="lazy">
-            <span class="gallery-badge-overlay">Flyer 03</span>
-          </div>
-          <div class="gallery-caption">
-            <div class="gallery-item-title">Recicla Villa Sustentável</div>
-            <div class="gallery-item-sub">Status &amp; Stories WhatsApp</div>
-          </div>
-        </div>
-
-        <!-- Flyer 4 -->
-        <div class="gallery-card-item" data-category="flyers" data-modal-title="Flyer 4: Plano de Governo &amp; Gestão" data-modal-src="assets/images/flyers/flyer_4_plano_governo.webp" data-modal-download="assets/images/flyers/flyer_4_plano_governo.png">
-          <div class="gallery-thumb-container ratio-stories">
-            <img src="assets/images/flyers/flyer_4_plano_governo.webp" alt="Flyer Plano de Governo" class="gallery-thumb-img" loading="lazy">
-            <span class="gallery-badge-overlay">Flyer 04</span>
-          </div>
-          <div class="gallery-caption">
-            <div class="gallery-item-title">Plano de Governo</div>
-            <div class="gallery-item-sub">Status &amp; Stories WhatsApp</div>
-          </div>
-        </div>
-
-        <!-- Flyer 5 -->
-        <div class="gallery-card-item" data-category="flyers" data-modal-title="Flyer 5: Guarda-Barcos Estruturado" data-modal-src="assets/images/flyers/flyer_5_guarda_barcos.webp" data-modal-download="assets/images/flyers/flyer_5_guarda_barcos.png">
-          <div class="gallery-thumb-container ratio-stories">
-            <img src="assets/images/flyers/flyer_5_guarda_barcos.webp" alt="Flyer Guarda-Barcos" class="gallery-thumb-img" loading="lazy">
-            <span class="gallery-badge-overlay">Flyer 05</span>
-          </div>
-          <div class="gallery-caption">
-            <div class="gallery-item-title">Guarda-Barcos Seguro</div>
-            <div class="gallery-item-sub">Status &amp; Stories WhatsApp</div>
-          </div>
-        </div>
-
-        <!-- Flyer 6 -->
-        <div class="gallery-card-item" data-category="flyers" data-modal-title="Flyer 6: Acessibilidade &amp; Espaço TEA" data-modal-src="assets/images/flyers/flyer_6_acessibilidade.webp" data-modal-download="assets/images/flyers/flyer_6_acessibilidade.png">
-          <div class="gallery-thumb-container ratio-stories">
-            <img src="assets/images/flyers/flyer_6_acessibilidade.webp" alt="Flyer Acessibilidade" class="gallery-thumb-img" loading="lazy">
-            <span class="gallery-badge-overlay">Flyer 06</span>
-          </div>
-          <div class="gallery-caption">
-            <div class="gallery-item-title">Acessibilidade &amp; TEA</div>
-            <div class="gallery-item-sub">Status &amp; Stories WhatsApp</div>
-          </div>
-        </div>
-
-        <!-- Flyer 7 -->
-        <div class="gallery-card-item" data-category="flyers" data-modal-title="Flyer 7: Equipe Completa CHAPA 2" data-modal-src="assets/images/flyers/flyer_7_equipe_chapa2.webp" data-modal-download="assets/images/flyers/flyer_7_equipe_chapa2.png">
-          <div class="gallery-thumb-container ratio-stories">
-            <img src="assets/images/flyers/flyer_7_equipe_chapa2.webp" alt="Flyer Equipe CHAPA 2" class="gallery-thumb-img" loading="lazy">
-            <span class="gallery-badge-overlay">Flyer 07</span>
-          </div>
-          <div class="gallery-caption">
-            <div class="gallery-item-title">Equipe CHAPA 2</div>
-            <div class="gallery-item-sub">Status &amp; Stories WhatsApp</div>
-          </div>
-        </div>
-
-        <!-- Flyer 8 -->
-        <div class="gallery-card-item" data-category="flyers" data-modal-title="Flyer 8: Compromisso Financeiro &amp; Compliance" data-modal-src="assets/images/flyers/flyer_8_compromisso_financeiro.webp" data-modal-download="assets/images/flyers/flyer_8_compromisso_financeiro.png">
-          <div class="gallery-thumb-container ratio-stories">
-            <img src="assets/images/flyers/flyer_8_compromisso_financeiro.webp" alt="Flyer Compromisso Financeiro" class="gallery-thumb-img" loading="lazy">
-            <span class="gallery-badge-overlay">Flyer 08</span>
-          </div>
-          <div class="gallery-caption">
-            <div class="gallery-item-title">Compromisso Financeiro</div>
-            <div class="gallery-item-sub">Status &amp; Stories WhatsApp</div>
-          </div>
+        <!-- Carousel Dots Indicator (8 Dots) -->
+        <div class="carousel-dots" id="flyersCarouselDots" aria-label="Navegação pelos flyers">
+          <button type="button" class="carousel-dot active" data-index="0" aria-label="Ir para Flyer 1: Minimercado" aria-selected="true"></button>
+          <button type="button" class="carousel-dot" data-index="1" aria-label="Ir para Flyer 2: Baias de Lazer" aria-selected="false"></button>
+          <button type="button" class="carousel-dot" data-index="2" aria-label="Ir para Flyer 3: Recicla Villa" aria-selected="false"></button>
+          <button type="button" class="carousel-dot" data-index="3" aria-label="Ir para Flyer 4: Plano de Governo" aria-selected="false"></button>
+          <button type="button" class="carousel-dot" data-index="4" aria-label="Ir para Flyer 5: Guarda-Barcos" aria-selected="false"></button>
+          <button type="button" class="carousel-dot" data-index="5" aria-label="Ir para Flyer 6: Acessibilidade" aria-selected="false"></button>
+          <button type="button" class="carousel-dot" data-index="6" aria-label="Ir para Flyer 7: Equipe Completa" aria-selected="false"></button>
+          <button type="button" class="carousel-dot" data-index="7" aria-label="Ir para Flyer 8: Compromisso Financeiro" aria-selected="false"></button>
         </div>
       </div>
     </div>

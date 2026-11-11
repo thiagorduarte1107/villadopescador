@@ -1075,42 +1075,74 @@ button {
 }
 
 .carousel-nav-arrows {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(2, 28, 14, 0.75);
+  padding: 4px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 199, 44, 0.25);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
 
 .btn-carousel-nav {
   width: 44px;
   height: 44px;
   min-width: 44px;
+  min-height: 44px;
   border-radius: 50%;
-  background: rgba(255, 199, 44, 0.12);
-  border: 1.5px solid var(--color-gold);
+  background: linear-gradient(135deg, rgba(255, 199, 44, 0.12) 0%, rgba(2, 28, 14, 0.85) 100%);
+  border: 1.5px solid rgba(255, 199, 44, 0.45);
   color: var(--color-gold);
-  font-size: 1.5rem;
-  line-height: 1;
-  font-weight: 900;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
+  margin: 0;
+  line-height: 0;
   cursor: pointer;
   transition: all var(--transition-fast);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  outline: none;
+  position: relative;
+}
+
+.btn-carousel-nav .carousel-nav-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+  stroke: currentColor;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform var(--transition-fast);
+  flex-shrink: 0;
 }
 
 .btn-carousel-nav:hover:not(:disabled) {
-  background: var(--color-gold);
+  background: linear-gradient(180deg, #FBE06B 0%, #E8A825 50%, #C9820A 100%);
   color: #021a0c;
-  transform: scale(1.08);
-  box-shadow: 0 4px 18px rgba(255, 199, 44, 0.45);
+  border-color: #ffffff;
+  transform: scale(1.06);
+  box-shadow: 0 6px 20px rgba(232, 168, 37, 0.55), 0 0 14px rgba(255, 199, 44, 0.4);
+}
+
+.btn-carousel-nav:active:not(:disabled) {
+  transform: scale(0.95);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
 
 .btn-carousel-nav:disabled {
-  opacity: 0.3;
+  opacity: 0.22;
   cursor: not-allowed;
-  border-color: rgba(255, 255, 255, 0.2);
-  color: rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+  border-color: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.25);
+  box-shadow: none;
+  transform: none;
 }
 
 .carousel-track-container {

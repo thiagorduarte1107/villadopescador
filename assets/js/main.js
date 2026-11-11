@@ -283,21 +283,31 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { passive: true });
 
   // ==========================================
-  // 6. SHARE HANDLER (WHATSAPP / NATIVE SHARE)
+  // 6. SHARE HANDLER (WHATSAPP / NATIVE SHARE) & URL /chapa2
   // ==========================================
+  // Normalizar URL no navegador para /chapa2
+  if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+    const newUrl = '/chapa2' + window.location.hash;
+    window.history.replaceState(null, '', newUrl);
+  }
+
+  const getCampaignShareUrl = () => {
+    return `${window.location.origin}/chapa2`;
+  };
+
   const shareButtons = document.querySelectorAll('.btn-share-campaign');
-  const shareData = {
+  const getShareData = () => ({
     title: 'CHAPA 2 • NOVA VISÃO | Villa do Pescador',
     text: 'Confira as propostas, a equipe e o Plano de Gestão Oficial da CHAPA 2 para o Condomínio Villa do Pescador! Vote em quem tem experiência comprovada.',
-    url: window.location.href
-  };
+    url: getCampaignShareUrl()
+  });
 
   shareButtons.forEach(btn => {
     btn.addEventListener('click', async (e) => {
       e.preventDefault();
       if (navigator.share) {
         try {
-          await navigator.share(shareData);
+          await navigator.share(getShareData());
           showToast('Compartilhado com sucesso!');
         } catch (err) {
           if (err.name !== 'AbortError') {
@@ -314,7 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const textMsg = encodeURIComponent(
       `*CHAPA 2 • NOVA VISÃO — Villa do Pescador*\n` +
       `Conheça os projetos, a equipe e o Plano de Gestão Oficial em PDF para o nosso condomínio:\n` +
-      `${window.location.href}`
+      `${getCampaignShareUrl()}`
     );
     const waUrl = `https://api.whatsapp.com/send?text=${textMsg}`;
     window.open(waUrl, '_blank');

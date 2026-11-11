@@ -61,15 +61,27 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnPrev) btnPrev.disabled = (currentPdfPage === 1);
     if (btnNext) btnNext.disabled = (currentPdfPage === totalPdfPages);
 
-    // Update active thumb
+    // Update active thumb and aria attributes
     thumbButtons.forEach((btn, idx) => {
       if (idx + 1 === currentPdfPage) {
         btn.classList.add('active');
+        btn.setAttribute('aria-current', 'page');
         btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
       } else {
         btn.classList.remove('active');
+        btn.removeAttribute('aria-current');
       }
     });
+
+    // UX Performance: Preload adjacent PDF pages into browser cache
+    if (currentPdfPage < totalPdfPages) {
+      const preloadNext = new Image();
+      preloadNext.src = `assets/images/pages/page_${currentPdfPage + 1}.webp`;
+    }
+    if (currentPdfPage > 1) {
+      const preloadPrev = new Image();
+      preloadPrev.src = `assets/images/pages/page_${currentPdfPage - 1}.webp`;
+    }
   }
 
   if (btnPrev) {
@@ -150,9 +162,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalImg = document.getElementById('modalImg');
   const modalDownloadBtn = document.getElementById('modalDownloadBtn');
   const modalCloseBtn = document.getElementById('modalCloseBtn');
+  let lastActiveElement = null;
 
-  function openModal(title, imgSrc, downloadSrc) {
+  function openModal(title, imgSrc, downloadSrc, triggerEl) {
     if (!modal) return;
+    lastActiveElement = triggerEl || document.activeElement;
     modalTitle.textContent = title;
     modalImg.src = imgSrc;
     modalImg.alt = title;
@@ -161,6 +175,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
+
+    // Focus close button for accessibility
+    setTimeout(() => {
+      modalCloseBtn?.focus();
+    }, 100);
   }
 
   function closeModal() {
@@ -170,6 +189,11 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       if (modalImg) modalImg.src = '';
     }, 200);
+
+    // Restore focus to original element
+    if (lastActiveElement && typeof lastActiveElement.focus === 'function') {
+      lastActiveElement.focus();
+    }
   }
 
   if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
@@ -179,8 +203,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal && modal.classList.contains('open')) {
-      closeModal();
+    if (e.key === 'Escape') {
+      if (modal && modal.classList.contains('open')) {
+        closeModal();
+      } else if (mobileDrawer && mobileDrawer.classList.contains('open')) {
+        mobileDrawer.classList.remove('open');
+        btnMobileMenu.textContent = '☰';
+        btnMobileMenu.setAttribute('aria-expanded', 'false');
+      }
     }
   });
 
@@ -191,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const title = el.dataset.modalTitle || 'Visualização do Material';
       const src = el.dataset.modalSrc;
       const download = el.dataset.modalDownload || src;
-      openModal(title, src, download);
+      openModal(title, src, download, el);
     });
   });
 

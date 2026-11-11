@@ -27,6 +27,9 @@
 </head>
 <body>
 
+  <!-- Acessibilidade: Atalho direto para o conteúdo -->
+  <a href="#plano-gestao" class="skip-link">Pular para o Plano de Gestão Oficial</a>
+
   <!-- ==========================================
        HEADER & NAVIGATION
        ========================================== -->
@@ -218,7 +221,7 @@
             <button type="button" class="btn-pdf-nav" id="btnPdfPrev" aria-label="Página Anterior">
               ← Anterior
             </button>
-            <div>
+            <div aria-live="polite" aria-atomic="true">
               <div class="pdf-page-indicator" id="pdfPageIndicator">Página 1 de 10</div>
               <span class="pdf-page-title-badge" id="pdfPageTitleBadge">Capa Oficial & Identidade</span>
             </div>

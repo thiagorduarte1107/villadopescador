@@ -899,12 +899,22 @@ button {
 /* Thumbnail Strip */
 .pdf-thumb-strip {
   display: flex;
+  justify-content: safe center;
+  align-items: center;
   gap: 10px;
   overflow-x: auto;
   width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
   padding: 10px 4px 18px;
   scrollbar-width: thin;
   scrollbar-color: var(--color-gold) rgba(255,255,255,0.05);
+}
+
+@supports not (justify-content: safe center) {
+  .pdf-thumb-strip {
+    justify-content: center;
+  }
 }
 
 .pdf-thumb-strip::-webkit-scrollbar {

@@ -111,19 +111,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Touch swipe support on PDF preview
   let touchStartX = 0;
-  let touchEndX = 0;
+  let touchStartY = 0;
+  let suppressClickUntil = 0;
   if (pageWrapper) {
     pageWrapper.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
     }, { passive: true });
 
     pageWrapper.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
+      const dx = e.changedTouches[0].screenX - touchStartX;
+      const dy = e.changedTouches[0].screenY - touchStartY;
+      // Só troca de página em swipe claramente horizontal; o click fantasma
+      // que o browser dispara depois do touchend é suprimido para não abrir o lightbox
+      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+        suppressClickUntil = Date.now() + 400;
+        updatePdfViewer(dx < 0 ? currentPdfPage + 1 : currentPdfPage - 1);
+      }
     }, { passive: true });
 
     // Click to zoom in modal
     pageWrapper.addEventListener('click', () => {
+      if (Date.now() < suppressClickUntil) return;
       const meta = pdfPageMeta[currentPdfPage - 1];
       openModal(
         `Plano de Gestão — Página ${currentPdfPage}: ${meta.title}`,
@@ -131,19 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
         `assets/images/pages/page_${currentPdfPage}.png`
       );
     });
-  }
-
-  function handleSwipe() {
-    const diff = touchEndX - touchStartX;
-    if (Math.abs(diff) > 45) {
-      if (diff < 0) {
-        // Swipe left -> Next
-        updatePdfViewer(currentPdfPage + 1);
-      } else {
-        // Swipe right -> Prev
-        updatePdfViewer(currentPdfPage - 1);
-      }
-    }
   }
 
   // Keyboard navigation for PDF
@@ -170,8 +166,9 @@ document.addEventListener('DOMContentLoaded', () => {
     modalTitle.textContent = title;
     modalImg.src = imgSrc;
     modalImg.alt = title;
-    modalDownloadBtn.href = downloadSrc || imgSrc;
-    modalDownloadBtn.setAttribute('download', (downloadSrc || imgSrc).split('/').pop());
+    const adaptiveSrc = toAdaptiveAsset(downloadSrc || imgSrc);
+    modalDownloadBtn.href = adaptiveSrc;
+    modalDownloadBtn.setAttribute('download', adaptiveSrc.split('/').pop());
 
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -295,10 +292,15 @@ document.addEventListener('DOMContentLoaded', () => {
     return `${window.location.origin}/chapa2`;
   };
 
+  // Voz oficial da campanha — slogan e fechamento unicos para todas
+  // as mensagens compartilhadas (cards, modal e compartilhamento geral)
+  const CAMPAIGN_SLOGAN = 'Experiência, Gestão e Compromisso Real com o Condomínio Villa do Pescador!';
+  const VOTE_LINE = `🗳️ _Vote CHAPA 2 • NOVA VISÃO — ${CAMPAIGN_SLOGAN}_`;
+
   const shareButtons = document.querySelectorAll('.btn-share-campaign');
   const getShareData = () => ({
     title: 'CHAPA 2 • NOVA VISÃO | Villa do Pescador',
-    text: 'Olá, vizinho(a)! Conheça as propostas, a equipe e o Plano de Gestão Oficial da CHAPA 2 para o nosso Condomínio Villa do Pescador. Vote em quem tem experiência comprovada!',
+    text: `Olá, vizinho(a)! Conheça as propostas, a equipe e o Plano de Gestão Oficial da CHAPA 2 para o nosso Condomínio Villa do Pescador. ${CAMPAIGN_SLOGAN}`,
     url: getCampaignShareUrl()
   });
 
@@ -323,40 +325,119 @@ document.addEventListener('DOMContentLoaded', () => {
   function fallbackWhatsAppShare() {
     const textMsg = encodeURIComponent(
       `👋 *Olá, vizinho(a) do Villa do Pescador!*\n\n` +
-      `Gostaríamos de convidar você a conhecer as propostas, a equipe e o Plano de Gestão Oficial da *CHAPA 2 • NOVA VISÃO* para o nosso condomínio! 🏡✨\n\n` +
+      `Convido você a conhecer a *CHAPA 2 • NOVA VISÃO* — a chapa com *experiência comprovada de síndico* e plano de gestão real para o nosso condomínio! 🏡✨\n\n` +
+      `_"${CAMPAIGN_SLOGAN}"_\n\n` +
       `📌 *Nossos Principais Compromissos:*\n` +
-      `• Minimercado autônomo 24h & conveniência interna\n` +
-      `• Baias de lazer náutico e guarda-barcos estruturado\n` +
-      `• Coleta seletiva e sustentabilidade (Recicla Villa)\n` +
-      `• Gestão financeira transparente com prestação de contas rigorosa\n` +
-      `• Equipe com 5 anos de experiência comprovada de síndico/subsíndico e contas aprovadas\n\n` +
-      `📄 Acesse nosso portal interativo, veja as fotos, conheça cada candidato e baixe o *Plano de Gestão Oficial em PDF*:\n` +
+      `• 🛒 Minimercado autônomo 24h a custo ZERO para o condomínio\n` +
+      `• ⛵ Baias de lazer náutico & Guarda-Barcos monitorado 24h\n` +
+      `• ♻️ Recicla Villa: R$ 3,00/kg pago direto ao morador\n` +
+      `• ♿ Acessibilidade NBR 9050 & Espaço Sensorial TEA\n` +
+      `• 📊 Transparência total: cotação tríplice obrigatória e contas abertas\n\n` +
+      `📄 Acesse o portal, veja o *Plano de Gestão Oficial em PDF* e conheça cada candidato:\n` +
       `${getCampaignShareUrl()}\n\n` +
-      `🗳️ _Vote em quem tem experiência comprovada, dedicação e transparência pelo Villa do Pescador!_`
+      VOTE_LINE
     );
     const waUrl = `https://api.whatsapp.com/send?text=${textMsg}`;
     window.open(waUrl, '_blank');
   }
 
   // Direct WhatsApp Share Handler for each Card
-  document.querySelectorAll('.btn-card-share').forEach(btn => {
-    btn.addEventListener('click', (e) => {
+  // (:not(#modalShareWaBtn) — o botao do modal tem handler proprio abaixo;
+  // sem a exclusao cada clique abriria DUAS abas do WhatsApp)
+  document.querySelectorAll('.btn-card-share:not(#modalShareWaBtn)').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
       e.preventDefault();
       e.stopPropagation();
 
-      const title = btn.dataset.shareTitle || 'CHAPA 2 • NOVA VISÃO';
-      const text = btn.dataset.shareText || 'Confira os projetos e a equipe da CHAPA 2 para o Condomínio Villa do Pescador:';
       const campaignUrl = getCampaignShareUrl();
 
+      const card = btn.closest('.member-card, .proposal-card, .flyer-card, .gallery-card-item');
+      const downloadLink = card ? card.querySelector('a[download][href]') : null;
+      const imageUrl = downloadLink
+        ? new URL(downloadLink.getAttribute('href'), window.location.href).href
+        : null;
+
+      const shareText =
+        `👋 *Olá, vizinho(a)!*\n\n` +
+        `Confira este material oficial da *CHAPA 2 • NOVA VISÃO* para o nosso Condomínio Villa do Pescador:\n\n` +
+        `📲 Conheça todas as propostas, a equipe e o Plano de Gestão Oficial:\n${campaignUrl}\n\n` +
+        VOTE_LINE;
+
+      // Mobile: anexa a imagem de verdade via Web Share API (files).
+      // Prioridade 1: print do card renderizado via SnapDOM (importado sob demanda)
+      if (card && navigator.canShare) {
+        try {
+          const { snapdom } = await import('/assets/js/vendor/snapdom.mjs');
+          // Esconde os botoes de acao durante a captura — nao fazem sentido num print
+          const actionBtns = card.querySelector('.card-action-buttons');
+          if (actionBtns) actionBtns.style.display = 'none';
+          // Colapsa o card na altura do conteudo (carousel usa flex:1 + 100%
+          // e deixaria um vao vazio onde estavam os botoes)
+          const prevFlex = card.style.flex;
+          const prevHeight = card.style.height;
+          card.style.flex = '0 0 auto';
+          card.style.height = 'auto';
+          let blob;
+          try {
+            blob = await snapdom.toBlob(card, {
+              scale: 2,
+              embedFonts: true,
+              backgroundColor: '#010f07',
+              format: 'png'
+            });
+          } finally {
+            if (actionBtns) actionBtns.style.display = '';
+            card.style.flex = prevFlex;
+            card.style.height = prevHeight;
+          }
+          const file = new File([blob], 'chapa2-card.png', { type: 'image/png' });
+          if (navigator.canShare({ files: [file] })) {
+            await navigator.share({
+              title: 'CHAPA 2 • NOVA VISÃO | Villa do Pescador',
+              text: shareText,
+              files: [file]
+            });
+            return;
+          }
+        } catch (err) {
+          if (err.name === 'AbortError') return;
+        }
+      }
+
+      // Prioridade 2: arte oficial pronta do card
+      if (imageUrl && navigator.canShare) {
+        try {
+          const resp = await fetch(imageUrl);
+          const blob = await resp.blob();
+          const fileName = imageUrl.split('/').pop() || 'chapa2.png';
+          const ext = (fileName.split('.').pop() || '').toLowerCase();
+          const mime = { png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg',
+                         webp: 'image/webp', gif: 'image/gif' }[ext];
+          const file = new File([blob], fileName, {
+            type: mime || blob.type || 'image/png'
+          });
+          if (navigator.canShare({ files: [file] })) {
+            await navigator.share({
+              title: 'CHAPA 2 • NOVA VISÃO | Villa do Pescador',
+              text: shareText,
+              files: [file]
+            });
+            return;
+          }
+        } catch (err) {
+          if (err.name === 'AbortError') return;
+        }
+      }
+
+      // Fallback (desktop / sem suporte a files): link da imagem no texto
+      const imageLine = imageUrl ? `🖼️ *Imagem oficial:*\n${imageUrl}\n\n` : '';
       const waMsg = encodeURIComponent(
         `👋 *Olá, vizinho(a)!*\n\n` +
-        `Veja essa proposta da *CHAPA 2 • NOVA VISÃO* para o nosso condomínio:\n\n` +
-        `📌 *${title}*\n` +
-        `${text}\n\n` +
+        `Confira este material oficial da *CHAPA 2 • NOVA VISÃO* para o nosso Condomínio Villa do Pescador:\n\n` +
+        imageLine +
         `📲 Conheça todas as propostas, a equipe e o Plano de Gestão Oficial:\n${campaignUrl}\n\n` +
-        `🤝 _Vote CHAPA 2: Experiência comprovada e compromisso com o Villa do Pescador!_`
+        VOTE_LINE
       );
-
       const waUrl = `https://api.whatsapp.com/send?text=${waMsg}`;
       window.open(waUrl, '_blank');
       showToast('Abrindo WhatsApp...');
@@ -374,11 +455,34 @@ document.addEventListener('DOMContentLoaded', () => {
         `Confira este material oficial da *CHAPA 2 • NOVA VISÃO* para o Condomínio Villa do Pescador:\n\n` +
         `📌 *${title}*\n\n` +
         `📲 Acesse o portal completo, conheça a equipe e baixe o Plano de Gestão:\n${campaignUrl}\n\n` +
-        `🤝 _Vote CHAPA 2: Experiência comprovada pelo nosso condomínio!_`
+        VOTE_LINE
       );
       const waUrl = `https://api.whatsapp.com/send?text=${waMsg}`;
       window.open(waUrl, '_blank');
       showToast('Abrindo WhatsApp...');
+    });
+  }
+
+  // ==========================================
+  // 6.5 ADAPTIVE ASSET DELIVERY (MOBILE vs PC)
+  // Mobile recebe a versao .webp leve (otimizada para tela de celular
+  // e compartilhamento rapido no WhatsApp); PC recebe o .png real
+  // em alta resolucao (1620x2025).
+  // ==========================================
+  const isMobileContext = () =>
+    window.matchMedia('(pointer: coarse)').matches ||
+    window.matchMedia('(max-width: 768px)').matches ||
+    /Android|webOS|iPhone|iPad|iPod|Mobi/i.test(navigator.userAgent);
+
+  const toAdaptiveAsset = (src) =>
+    isMobileContext() ? src.replace(/\.png(\?.*)?$/i, '.webp$1') : src;
+
+  // Swap de todos os links de download .png -> .webp em dispositivos mobile
+  if (isMobileContext()) {
+    document.querySelectorAll('a[download][href$=".png"]').forEach(a => {
+      const original = a.getAttribute('href');
+      a.setAttribute('href', toAdaptiveAsset(original));
+      a.setAttribute('download', toAdaptiveAsset(a.getAttribute('download') || original.split('/').pop()));
     });
   }
 

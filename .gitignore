@@ -7,3 +7,8 @@ __pycache__/
 node_modules/
 
 .vercel
+audit_shots/
+audit_responsive.py
+test_share_fallbacks.py
+validate_share.py
+nul

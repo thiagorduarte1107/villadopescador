@@ -19,6 +19,12 @@
   --color-bg-glass: rgba(255, 255, 255, 0.05);
   --color-border-glass: rgba(255, 199, 44, 0.22);
   --color-border-card: rgba(255, 199, 44, 0.35);
+
+  /* Superficie unificada de cards — fundo chapado (opaco) sobre o cenario */
+  --card-surface:
+    radial-gradient(120% 160% at 0% 50%, rgba(255, 199, 44, 0.10), transparent 55%),
+    linear-gradient(135deg, rgb(6, 52, 28), rgb(1, 20, 10));
+  --card-border-line: rgba(255, 199, 44, 0.28);
   
   --color-text-main: #f8fafc;
   --color-text-muted: #cbd5e1;
@@ -32,6 +38,7 @@
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
   --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.55);
   --shadow-gold: 0 8px 30px rgba(255, 199, 44, 0.25);
+  --card-surface-shadow: var(--shadow-md), inset 0 1px 0 rgba(255, 255, 255, 0.05);
   
   --radius-sm: 8px;
   --radius-md: 14px;
@@ -96,6 +103,12 @@ html {
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Feedback de toque: substitui o flash cinza padrão do iOS pelo dourado
+   da identidade visual ao tocar em elementos interativos */
+a, button, [role="button"], .pdf-toc-item, [data-modal-src] {
+  -webkit-tap-highlight-color: rgba(255, 199, 44, 0.15);
 }
 
 body {
@@ -356,28 +369,37 @@ button {
 /* Hero Section */
 .hero-section {
   position: relative;
-  padding: 60px 0 80px;
+  padding: 60px 0 24px;
   overflow: hidden;
 }
 
 @media (min-width: 768px) {
   .hero-section {
-    padding: 90px 0 110px;
+    padding: 90px 0 30px;
   }
 }
 
+/* Hero -> Plano de Gestão: aproxima o banner da urna da seção seguinte */
+#plano-gestao {
+  padding-top: 16px;
+}
+
+@media (min-width: 768px) {
+  #plano-gestao {
+    padding-top: 24px;
+  }
+}
+
+/* Cenário de fundo FIXO: cobre a viewport inteira (topo ao rodapé),
+   atrás de todo o conteúdo — posição fixed escapa do overflow do hero. */
 .hero-bg-scenery {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  position: fixed;
+  inset: 0;
   background: url('../images/candidates/hero_scenery.webp') center top / cover no-repeat;
-  opacity: 0.18;
+  opacity: 0.16;
   filter: saturate(1.2);
-  z-index: 0;
-  mask-image: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 70%, transparent 100%);
-  -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 70%, transparent 100%);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .hero-glow-sphere {
@@ -478,7 +500,7 @@ button {
 
 .hero-leader-card {
   flex: 1;
-  background: linear-gradient(135deg, rgba(3, 35, 17, 0.85) 0%, rgba(2, 20, 10, 0.95) 100%);
+  background: var(--card-surface);
   border: 2px solid var(--color-gold);
   border-radius: var(--radius-lg);
   padding: 20px;
@@ -486,7 +508,8 @@ button {
   align-items: center;
   gap: 18px;
   text-align: left;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--card-surface-shadow);
+  position: relative;
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
@@ -604,15 +627,16 @@ button {
 }
 
 .metric-box {
-  background: rgba(2, 28, 14, 0.7);
-  border: 1px solid var(--color-border-glass);
+  background: var(--card-surface);
+  border: 1px solid var(--card-border-line);
   border-radius: var(--radius-md);
   padding: 18px 16px;
   display: flex;
   align-items: center;
   gap: 14px;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--card-surface-shadow);
   text-align: left;
+  position: relative;
 }
 
 .metric-icon-wrap {
@@ -807,6 +831,7 @@ button {
   border: 2px solid rgba(255, 199, 44, 0.4);
   background: #010f07;
   cursor: zoom-in;
+  touch-action: pan-y;
 }
 
 .pdf-current-page-img {
@@ -859,6 +884,7 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  min-height: 44px;
   background: rgba(255, 199, 44, 0.12);
   border: 1.5px solid var(--color-gold);
   color: #ffffff;
@@ -903,6 +929,7 @@ button {
   align-items: center;
   gap: 10px;
   overflow-x: auto;
+  overscroll-behavior-x: contain;
   width: 100%;
   max-width: 100%;
   margin: 0 auto;
@@ -961,7 +988,7 @@ button {
   left: 3px;
   background: rgba(0, 0, 0, 0.85);
   color: #ffffff;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 800;
   padding: 2px 6px;
   border-radius: 4px;
@@ -1067,6 +1094,8 @@ button {
   font-weight: 700;
   color: var(--color-gold);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .carousel-counter-badge strong {
@@ -1084,6 +1113,7 @@ button {
   border-radius: var(--radius-pill);
   border: 1px solid rgba(255, 199, 44, 0.25);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  flex-shrink: 0;
 }
 
 .btn-carousel-nav {
@@ -1137,7 +1167,6 @@ button {
   transform: scale(0.94);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
-}
 
 .carousel-track-container {
   overflow: hidden;
@@ -1150,6 +1179,7 @@ button {
   display: flex;
   gap: 20px;
   overflow-x: auto;
+  overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   scrollbar-width: none;
@@ -1231,6 +1261,14 @@ button {
   cursor: pointer;
   padding: 0;
   transition: all var(--transition-normal);
+  position: relative;
+}
+
+/* Área de toque mínima de 44px (WCAG) sem alterar o tamanho visual do dot */
+.carousel-dot::after {
+  content: '';
+  position: absolute;
+  inset: -16px;
 }
 
 .carousel-dot:hover {
@@ -1246,6 +1284,15 @@ button {
   box-shadow: 0 0 14px rgba(255, 199, 44, 0.7);
 }
 
+/* Anel de foco dourado nos controles do carrossel (o outline:none dos botões
+   sobrescreveria o :focus-visible global por vir depois na cascata) */
+.btn-carousel-nav:focus-visible,
+.carousel-dot:focus-visible,
+.btn-card-action:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
 .member-tier-pill {
   display: inline-flex;
   align-items: center;
@@ -1254,7 +1301,7 @@ button {
   border: 1px solid rgba(255, 199, 44, 0.35);
   color: var(--color-gold);
   font-family: var(--font-heading);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 800;
   padding: 4px 10px;
   border-radius: var(--radius-pill);
@@ -1301,14 +1348,14 @@ button {
 }
 
 .member-card {
-  background: linear-gradient(135deg, rgba(3, 30, 15, 0.9) 0%, rgba(1, 16, 8, 0.95) 100%);
-  border: 2px solid var(--color-border-card);
+  background: var(--card-surface);
+  border: 1px solid var(--card-border-line);
   border-radius: var(--radius-lg);
   padding: 22px;
   display: flex;
   flex-direction: column;
   height: 100%;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--card-surface-shadow);
   position: relative;
   transition: transform var(--transition-fast), border-color var(--transition-fast);
 }
@@ -1321,7 +1368,7 @@ button {
 
 .member-card.president-highlight {
   border: 2.5px solid var(--color-gold);
-  background: linear-gradient(135deg, rgba(4, 40, 20, 0.95) 0%, rgba(2, 24, 12, 0.98) 100%);
+  background: linear-gradient(135deg, rgb(4, 40, 20) 0%, rgb(2, 24, 12) 100%);
 }
 
 .member-head {
@@ -1411,18 +1458,24 @@ button {
 /* ==========================================================================
    STANDARDIZED DUAL ACTION BUTTONS (Baixar & WhatsApp)
    ========================================================================== */
+/* Flex-wrap: botão que não coube cai para linha própria em largura total */
 .card-action-buttons {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   width: 100%;
   margin-top: auto;
   padding-top: 14px;
 }
 
+.card-action-buttons .btn-card-action {
+  flex: 1 1 0;
+  min-width: min-content;
+}
+
 .btn-card-action {
-  min-height: 42px;
-  padding: 8px 10px;
+  min-height: 44px;
+  padding: 10px 16px;
   border-radius: var(--radius-pill);
   font-family: var(--font-heading);
   font-size: 0.8rem;
@@ -1441,6 +1494,7 @@ button {
   box-sizing: border-box;
   text-transform: uppercase;
   letter-spacing: 0.4px;
+  min-width: 0;
 }
 
 /* Download Button: Luxury Solid Gold Gradient */
@@ -1459,30 +1513,41 @@ button {
   box-shadow: 0 5px 18px rgba(232, 168, 37, 0.6);
 }
 
-/* WhatsApp Share Button: Vibrant Solid WhatsApp Green Pill */
+/* WhatsApp Share Button: Secondary Glass Gold Pill (padrão do sistema) */
 .btn-card-share {
-  background: linear-gradient(180deg, #2fe574 0%, #25D366 50%, #1ea952 100%);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 3px 12px rgba(37, 211, 102, 0.35);
+  background: rgba(255, 199, 44, 0.12);
+  color: var(--color-gold);
+  border: 1.5px solid var(--color-gold);
+  box-shadow: none;
 }
 
 .btn-card-share:hover {
-  background: linear-gradient(180deg, #51f592 0%, #2ce273 50%, #198741 100%);
-  color: #ffffff;
-  border-color: #ffffff;
+  background: var(--color-gold);
+  color: #021a0c;
+  border-color: var(--color-gold);
   transform: translateY(-2px);
-  box-shadow: 0 5px 18px rgba(37, 211, 102, 0.6);
+  box-shadow: 0 4px 16px rgba(255, 199, 44, 0.4);
 }
 
 .btn-card-action:active {
   transform: translateY(0) scale(0.96);
 }
 
-.btn-card-action svg {
+.btn-card-action svg,
+.btn-wa-icon {
   flex-shrink: 0;
   width: 15px;
   height: 15px;
+  display: block;
+}
+
+/* Impede que o rótulo transborde o botão em cards estreitos:
+   encolhe com reticências em vez de vazar para fora do card */
+.btn-card-action span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 @media (max-width: 360px) {
@@ -1490,12 +1555,13 @@ button {
     gap: 6px;
   }
   .btn-card-action {
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     padding: 7px 4px;
     gap: 4px;
     letter-spacing: 0.2px;
   }
-  .btn-card-action svg {
+  .btn-card-action svg,
+  .btn-wa-icon {
     width: 13px;
     height: 13px;
   }
@@ -1507,19 +1573,21 @@ button {
   justify-content: center;
   gap: 8px;
   min-height: 44px;
-  background: rgba(255, 199, 44, 0.1);
-  border: 1.5px solid var(--color-gold);
-  color: var(--color-gold);
+  background: linear-gradient(180deg, #FBE06B 0%, #E8A825 55%, #C9820A 100%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #021a0c;
   font-family: var(--font-heading);
-  font-weight: 700;
+  font-weight: 800;
   font-size: 0.85rem;
   padding: 10px 18px;
   border-radius: var(--radius-pill);
+  box-shadow: 0 6px 20px rgba(232, 168, 37, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.5);
   transition: all var(--transition-fast);
 }
 
 .btn-view-card:hover {
-  background: var(--color-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(232, 168, 37, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.5);
   color: #021a0c;
 }
 
@@ -1609,11 +1677,12 @@ button {
 }
 
 .proposal-card {
-  background: linear-gradient(180deg, rgba(3, 30, 15, 0.85) 0%, rgba(1, 15, 7, 0.95) 100%);
-  border: 1.5px solid var(--color-border-card);
+  background: var(--card-surface);
+  border: 1px solid var(--card-border-line);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--card-surface-shadow);
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -1653,7 +1722,7 @@ button {
   border: 1px solid var(--color-gold);
   color: var(--color-gold);
   font-family: var(--font-heading);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 800;
   padding: 4px 10px;
   border-radius: var(--radius-pill);
@@ -1720,19 +1789,21 @@ button {
   gap: 8px;
   width: 100%;
   min-height: 44px;
-  background: rgba(255, 199, 44, 0.12);
-  border: 1.5px solid var(--color-gold);
-  color: var(--color-gold);
+  background: linear-gradient(180deg, #FBE06B 0%, #E8A825 55%, #C9820A 100%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #021a0c;
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: 0.88rem;
   padding: 11px 16px;
   border-radius: var(--radius-pill);
+  box-shadow: 0 6px 20px rgba(232, 168, 37, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.5);
   transition: all var(--transition-fast);
 }
 
 .btn-open-proposal-card:hover {
-  background: var(--color-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(232, 168, 37, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.5);
   color: #021a0c;
 }
 
@@ -1759,18 +1830,22 @@ button {
   }
 }
 
+/* Desktop: 3 flyers visíveis (mesmo ritmo do carrossel de propostas em
+   ≥1024px). Em 4 colunas os cards ficavam estreitos demais (~225px) e os
+   rótulos "Baixar"/"WhatsApp" transbordavam os botões de ação. */
 @media (min-width: 1024px) {
   .carousel-slide.flyer-slide {
-    flex: 0 0 calc(25% - 15px);
+    flex: 0 0 calc(33.333% - 14px);
   }
 }
 
 .flyer-card {
-  background: linear-gradient(180deg, rgba(3, 30, 15, 0.85) 0%, rgba(1, 15, 7, 0.95) 100%);
-  border: 1.5px solid var(--color-border-card);
+  background: var(--card-surface);
+  border: 1px solid var(--card-border-line);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--card-surface-shadow);
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -1786,7 +1861,7 @@ button {
 .flyer-card-thumb-wrap {
   position: relative;
   width: 100%;
-  aspect-ratio: 9 / 16;
+  aspect-ratio: 4 / 5;
   overflow: hidden;
   background: #011208;
   cursor: pointer;
@@ -1804,7 +1879,7 @@ button {
 }
 
 .flyer-card-body {
-  padding: 18px 20px;
+  padding: 16px 18px;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -1855,9 +1930,9 @@ button {
 .btn-open-flyer-card {
   width: 100%;
   min-height: 44px;
-  background: rgba(255, 199, 44, 0.12);
-  border: 1.5px solid var(--color-gold);
-  color: var(--color-gold);
+  background: linear-gradient(180deg, #FBE06B 0%, #E8A825 55%, #C9820A 100%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #021a0c;
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: 0.86rem;
@@ -1869,12 +1944,71 @@ button {
   justify-content: center;
   gap: 8px;
   cursor: pointer;
+  box-shadow: 0 6px 20px rgba(232, 168, 37, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .btn-open-flyer-card:hover {
-  background: var(--color-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(232, 168, 37, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.5);
   color: #021a0c;
-  box-shadow: 0 4px 16px rgba(255, 199, 44, 0.4);
+}
+
+/* --- Flyer card: botões de ação mais compactos ---------------------------
+   Os cards de flyer são mais estreitos que os de proposta/membro (2-3 por
+   linha em vez de largura total), então os rótulos "Baixar"/"WhatsApp"
+   precisam de menos padding/fonte para caber lado a lado sem transbordar. */
+.flyer-card .btn-card-action {
+  font-size: 0.78rem;
+  padding: 10px 10px;
+  gap: 5px;
+  letter-spacing: 0.2px;
+}
+
+/* Mobile/tablet retrato: limita a altura da thumb para que o card não
+   ultrapasse a viewport. object-fit: contain exibe o flyer 9:16 inteiro
+   (sem cortes) sobre o fundo verde-escuro do wrap — barras laterais mínimas
+   se misturam ao próprio flyer. */
+@media (max-width: 639px) {
+  .flyer-card-thumb-wrap {
+    max-height: 60vh;
+  }
+  .flyer-card-thumb {
+    object-fit: contain;
+  }
+}
+
+/* Telas muito estreitas (≤420px): corpo do card e botões ainda mais
+   compactos para manter os dois botões na mesma linha sem transbordar.
+   O min-height: 44px herdado preserva a área de toque. */
+@media (max-width: 420px) {
+  .flyer-card-body {
+    padding: 14px 16px;
+  }
+  .flyer-title {
+    font-size: 1.05rem;
+  }
+  .flyer-desc {
+    font-size: 0.78rem;
+    margin-bottom: 12px;
+  }
+  .flyer-card .btn-card-action {
+    font-size: 0.75rem;
+    padding: 8px 6px;
+    gap: 4px;
+    letter-spacing: 0.1px;
+  }
+  .flyer-card .btn-card-action svg {
+    width: 13px;
+    height: 13px;
+  }
+  .carousel-top-bar {
+    margin-bottom: 14px;
+    gap: 10px;
+  }
+  .carousel-counter-badge {
+    padding: 7px 12px;
+    font-size: 0.8rem;
+  }
 }
 
 /* ==========================================================================
@@ -1937,10 +2071,12 @@ button {
 }
 
 .gallery-card-item {
-  background: rgba(2, 22, 11, 0.75);
-  border: 1.5px solid rgba(255, 199, 44, 0.25);
+  background: var(--card-surface);
+  border: 1px solid var(--card-border-line);
   border-radius: var(--radius-md);
   overflow: hidden;
+  position: relative;
+  box-shadow: var(--card-surface-shadow);
   display: flex;
   flex-direction: column;
   transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
@@ -2039,14 +2175,14 @@ button {
 }
 
 .step-card {
-  background: rgba(2, 22, 11, 0.75);
-  border: 1.5px solid rgba(255, 199, 44, 0.3);
+  background: var(--card-surface);
+  border: 1px solid var(--card-border-line);
   border-radius: var(--radius-lg);
   padding: 24px 20px;
   display: flex;
   flex-direction: column;
   position: relative;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--card-surface-shadow);
 }
 
 .step-num-badge {
@@ -2082,10 +2218,12 @@ button {
 
 /* Safe Support Notice (Zero private phone/email!) */
 .safe-support-callout {
-  background: linear-gradient(135deg, rgba(2, 40, 20, 0.95), rgba(1, 24, 12, 0.95));
-  border: 2px dashed var(--color-gold);
+  background: var(--card-surface);
+  border: 1.5px solid var(--color-gold);
   border-radius: var(--radius-lg);
   padding: 24px 20px;
+  position: relative;
+  box-shadow: var(--card-surface-shadow);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2125,55 +2263,176 @@ button {
 }
 
 /* Final Electoral Banner */
+/* Painel premium dark-glass: glow radial gold, hairline superior, chip de
+   ícone SVG e pill CTA com sweep de brilho — mesma linguagem do hero. */
 .final-vote-ribbon {
-  background: linear-gradient(180deg, #FBE06B 0%, #E8A825 50%, #C9820A 100%);
-  border-radius: var(--radius-pill);
-  padding: 16px 24px;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 160% at 0% 50%, rgba(255, 199, 44, 0.10), transparent 55%),
+    linear-gradient(135deg, rgb(6, 52, 28), rgb(1, 20, 10));
+  border: 1px solid rgba(255, 199, 44, 0.28);
+  border-radius: var(--radius-lg);
+  padding: 26px 22px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  box-shadow: 0 10px 30px rgba(232, 168, 37, 0.5);
-  border: 2px solid #ffffff;
+  gap: 18px;
+  box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255, 255, 255, 0.05);
   text-align: center;
+}
+
+.final-vote-ribbon::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 199, 44, 0.7), transparent);
 }
 
 @media (min-width: 640px) {
   .final-vote-ribbon {
     flex-direction: row;
     justify-content: space-between;
-    padding: 16px 36px;
+    gap: 24px;
+    padding: 22px 34px;
+    text-align: left;
   }
+}
+
+.ribbon-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.ribbon-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  background: rgba(255, 199, 44, 0.12);
+  border: 1px solid var(--color-gold);
+  color: var(--color-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ribbon-overline {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 2.6px;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+  margin-bottom: 3px;
 }
 
 .ribbon-title-text {
   font-family: var(--font-heading);
-  font-size: 1.25rem;
+  font-size: clamp(1rem, 4vw, 1.3rem);
   font-weight: 900;
-  letter-spacing: 1.5px;
-  color: #031c0e;
+  letter-spacing: 0.4px;
+  line-height: 1.25;
+  text-wrap: balance;
+  color: #ffffff;
   text-transform: uppercase;
 }
 
 .ribbon-vote-badge {
-  display: flex;
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  background: #021a0c;
-  color: var(--color-gold);
-  padding: 8px 20px;
+  background: linear-gradient(180deg, #FBE06B 0%, #E8A825 55%, #C9820A 100%);
+  color: #021a0c;
+  padding: 13px 28px;
   border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   font-family: var(--font-heading);
   font-weight: 900;
-  font-size: 1.1rem;
+  font-size: clamp(0.82rem, 3.4vw, 0.98rem);
+  letter-spacing: 1px;
+  text-align: center;
+  box-shadow: 0 8px 26px rgba(232, 168, 37, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  flex-shrink: 0;
+}
+
+.ribbon-vote-badge::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  transform: skewX(-20deg);
+  animation: ribbon-shine 3.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Mini tecla CONFIRMA da urna eletronica: verde + relevo de tecla fisica */
+.urna-key {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  background: linear-gradient(180deg, #2FBF55 0%, #14953F 55%, #0B7A31 100%);
+  color: #ffffff;
+  font-size: 0.72em;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  padding: 0.45em 0.95em;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 3px 0 #075C25,
+    0 5px 10px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+  transform: translateY(-2px);
+}
+
+@keyframes ribbon-shine {
+  0%, 55% { left: -80%; }
+  100% { left: 170%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ribbon-vote-badge::after {
+    animation: none;
+  }
+}
+
+/* Hairline dourada no topo — assinatura visual unificada de todos os cards */
+.metric-box::before,
+.hero-leader-card::before,
+.member-card::before,
+.proposal-card::before,
+.flyer-card::before,
+.gallery-card-item::before,
+.step-card::before,
+.safe-support-callout::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 199, 44, 0.7), transparent);
+  pointer-events: none;
 }
 
 /* ==========================================================================
    FOOTER
    ========================================================================== */
 .site-footer {
-  background: #010c05;
+  background: rgba(1, 12, 5, 0.45);
   border-top: 1px solid rgba(255, 199, 44, 0.25);
   padding: 48px 0 32px;
   color: var(--color-text-dim);

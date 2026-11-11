@@ -298,7 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const shareButtons = document.querySelectorAll('.btn-share-campaign');
   const getShareData = () => ({
     title: 'CHAPA 2 • NOVA VISÃO | Villa do Pescador',
-    text: 'Confira as propostas, a equipe e o Plano de Gestão Oficial da CHAPA 2 para o Condomínio Villa do Pescador! Vote em quem tem experiência comprovada.',
+    text: 'Olá, vizinho(a)! Conheça as propostas, a equipe e o Plano de Gestão Oficial da CHAPA 2 para o nosso Condomínio Villa do Pescador. Vote em quem tem experiência comprovada!',
     url: getCampaignShareUrl()
   });
 
@@ -322,9 +322,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function fallbackWhatsAppShare() {
     const textMsg = encodeURIComponent(
-      `*CHAPA 2 • NOVA VISÃO — Villa do Pescador*\n` +
-      `Conheça os projetos, a equipe e o Plano de Gestão Oficial em PDF para o nosso condomínio:\n` +
-      `${getCampaignShareUrl()}`
+      `👋 *Olá, vizinho(a) do Villa do Pescador!*\n\n` +
+      `Gostaríamos de convidar você a conhecer as propostas, a equipe e o Plano de Gestão Oficial da *CHAPA 2 • NOVA VISÃO* para o nosso condomínio! 🏡✨\n\n` +
+      `📌 *Nossos Principais Compromissos:*\n` +
+      `• Minimercado autônomo 24h & conveniência interna\n` +
+      `• Baias de lazer náutico e guarda-barcos estruturado\n` +
+      `• Coleta seletiva e sustentabilidade (Recicla Villa)\n` +
+      `• Gestão financeira transparente com prestação de contas rigorosa\n` +
+      `• Equipe com 5 anos de experiência comprovada de síndico/subsíndico e contas aprovadas\n\n` +
+      `📄 Acesse nosso portal interativo, veja as fotos, conheça cada candidato e baixe o *Plano de Gestão Oficial em PDF*:\n` +
+      `${getCampaignShareUrl()}\n\n` +
+      `🗳️ _Vote em quem tem experiência comprovada, dedicação e transparência pelo Villa do Pescador!_`
     );
     const waUrl = `https://api.whatsapp.com/send?text=${textMsg}`;
     window.open(waUrl, '_blank');
@@ -341,9 +349,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const campaignUrl = getCampaignShareUrl();
 
       const waMsg = encodeURIComponent(
-        `*${title}*\n\n` +
+        `👋 *Olá, vizinho(a)!*\n\n` +
+        `Veja essa proposta da *CHAPA 2 • NOVA VISÃO* para o nosso condomínio:\n\n` +
+        `📌 *${title}*\n` +
         `${text}\n\n` +
-        `📲 Veja todos os detalhes e o Plano de Gestão Oficial:\n${campaignUrl}`
+        `📲 Conheça todas as propostas, a equipe e o Plano de Gestão Oficial:\n${campaignUrl}\n\n` +
+        `🤝 _Vote CHAPA 2: Experiência comprovada e compromisso com o Villa do Pescador!_`
       );
 
       const waUrl = `https://api.whatsapp.com/send?text=${waMsg}`;
@@ -359,8 +370,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const title = modalTitle?.textContent || 'CHAPA 2 • NOVA VISÃO';
       const campaignUrl = getCampaignShareUrl();
       const waMsg = encodeURIComponent(
-        `*${title}*\n` +
-        `Confira este material oficial da CHAPA 2 • NOVA VISÃO para o Condomínio Villa do Pescador:\n${campaignUrl}`
+        `👋 *Olá, vizinho(a)!*\n\n` +
+        `Confira este material oficial da *CHAPA 2 • NOVA VISÃO* para o Condomínio Villa do Pescador:\n\n` +
+        `📌 *${title}*\n\n` +
+        `📲 Acesse o portal completo, conheça a equipe e baixe o Plano de Gestão:\n${campaignUrl}\n\n` +
+        `🤝 _Vote CHAPA 2: Experiência comprovada pelo nosso condomínio!_`
       );
       const waUrl = `https://api.whatsapp.com/send?text=${waMsg}`;
       window.open(waUrl, '_blank');

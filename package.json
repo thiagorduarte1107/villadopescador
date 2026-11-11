@@ -1,0 +1,17 @@
+{
+  "name": "chapa2-villa-do-pescador",
+  "version": "1.0.0",
+  "description": "Portal Oficial de Divulgação da CHAPA 2 - NOVA VISÃO | Condomínio Villa do Pescador",
+  "scripts": {
+    "dev": "npx serve .",
+    "start": "npx serve .",
+    "build": "echo 'Static build ready for Vercel'"
+  },
+  "keywords": [
+    "villa-do-pescador",
+    "chapa-2",
+    "eleicoes-condominio"
+  ],
+  "author": "Comitê Eleitoral CHAPA 2",
+  "license": "UNLICENSED"
+}

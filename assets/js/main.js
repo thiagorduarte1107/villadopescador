@@ -1,0 +1,308 @@
+/**
+ * CHAPA 2 - NOVA VISÃO | CONDOMÍNIO VILLA DO PESCADOR
+ * Main Interactive Portal Script
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  // ==========================================
+  // 1. PDF INTERACTIVE VIEWER STATE & LOGIC
+  // ==========================================
+  const totalPdfPages = 10;
+  let currentPdfPage = 1;
+
+  const pdfPageMeta = [
+    { num: 1, title: "Capa Oficial & Identidade", desc: "Apresentação da CHAPA 2 • Nova Visão para o Villa do Pescador" },
+    { num: 2, title: "Governança & Transparência", desc: "Patrimônio coletivo, conformidade estatutária e prestação aberta" },
+    { num: 3, title: "Infraestrutura Náutica", desc: "Guarda-barcos estruturado, monitoramento 24h e Boat Wash" },
+    { num: 4, title: "Minimercado Autônomo 24h", desc: "Custo ZERO de instalação e receita comercial revertida ao condomínio" },
+    { num: 5, title: "Baias de Lazer Náutico", desc: "Quiosques gourmet familiares às margens do lago com privacidade" },
+    { num: 6, title: "Recicla Villa & Economia", desc: "R$ 3,00/kg pago ao morador e lucro aplicado em melhorias" },
+    { num: 7, title: "Acessibilidade & TEA", desc: "Rampas NBR 9050 e Espaço Sensorial para famílias e crianças atípicas" },
+    { num: 8, title: "Equatorial & Construtora", desc: "Cobrança técnica diária de energia e ação jurídica com construtora" },
+    { num: 9, title: "Nossa Equipe & Organograma", desc: "Diretoria Executiva, Conselho Fiscal e Suplentes qualificados" },
+    { num: 10, title: "Guia do Eleitor & Voto", desc: "Procedimento de voto presencial e procuração simples sem burocracia" }
+  ];
+
+  const pageImg = document.getElementById('pdfCurrentPageImg');
+  const pageIndicator = document.getElementById('pdfPageIndicator');
+  const pageTitleBadge = document.getElementById('pdfPageTitleBadge');
+  const btnPrev = document.getElementById('btnPdfPrev');
+  const btnNext = document.getElementById('btnPdfNext');
+  const thumbButtons = document.querySelectorAll('.pdf-thumb-btn');
+  const tocItems = document.querySelectorAll('.pdf-toc-item');
+  const pageWrapper = document.getElementById('pdfPageWrapper');
+
+  function updatePdfViewer(pageIndex) {
+    if (pageIndex < 1) pageIndex = 1;
+    if (pageIndex > totalPdfPages) pageIndex = totalPdfPages;
+    currentPdfPage = pageIndex;
+
+    const meta = pdfPageMeta[currentPdfPage - 1];
+
+    // Smooth fade
+    if (pageImg) {
+      pageImg.style.opacity = '0.3';
+      setTimeout(() => {
+        pageImg.src = `assets/images/pages/page_${currentPdfPage}.webp`;
+        pageImg.alt = `Página ${currentPdfPage} - ${meta.title}`;
+        pageImg.dataset.full = `assets/images/pages/page_${currentPdfPage}.png`;
+        pageImg.style.opacity = '1';
+      }, 120);
+    }
+
+    if (pageIndicator) {
+      pageIndicator.textContent = `Página ${currentPdfPage} de ${totalPdfPages}`;
+    }
+    if (pageTitleBadge) {
+      pageTitleBadge.textContent = `${meta.title} — ${meta.desc}`;
+    }
+
+    // Nav buttons state
+    if (btnPrev) btnPrev.disabled = (currentPdfPage === 1);
+    if (btnNext) btnNext.disabled = (currentPdfPage === totalPdfPages);
+
+    // Update active thumb
+    thumbButtons.forEach((btn, idx) => {
+      if (idx + 1 === currentPdfPage) {
+        btn.classList.add('active');
+        btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+  }
+
+  if (btnPrev) {
+    btnPrev.addEventListener('click', () => updatePdfViewer(currentPdfPage - 1));
+  }
+  if (btnNext) {
+    btnNext.addEventListener('click', () => updatePdfViewer(currentPdfPage + 1));
+  }
+
+  thumbButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetPage = parseInt(btn.dataset.page, 10);
+      if (!isNaN(targetPage)) updatePdfViewer(targetPage);
+    });
+  });
+
+  tocItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const targetPage = parseInt(item.dataset.page, 10);
+      if (!isNaN(targetPage)) {
+        updatePdfViewer(targetPage);
+        const section = document.getElementById('plano-gestao');
+        if (section) section.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Touch swipe support on PDF preview
+  let touchStartX = 0;
+  let touchEndX = 0;
+  if (pageWrapper) {
+    pageWrapper.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    pageWrapper.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+
+    // Click to zoom in modal
+    pageWrapper.addEventListener('click', () => {
+      const meta = pdfPageMeta[currentPdfPage - 1];
+      openModal(
+        `Plano de Gestão — Página ${currentPdfPage}: ${meta.title}`,
+        `assets/images/pages/page_${currentPdfPage}.png`,
+        `assets/images/pages/page_${currentPdfPage}.png`
+      );
+    });
+  }
+
+  function handleSwipe() {
+    const diff = touchEndX - touchStartX;
+    if (Math.abs(diff) > 45) {
+      if (diff < 0) {
+        // Swipe left -> Next
+        updatePdfViewer(currentPdfPage + 1);
+      } else {
+        // Swipe right -> Prev
+        updatePdfViewer(currentPdfPage - 1);
+      }
+    }
+  }
+
+  // Keyboard navigation for PDF
+  window.addEventListener('keydown', (e) => {
+    const modal = document.getElementById('universalModal');
+    if (modal && modal.classList.contains('open')) return;
+    if (e.key === 'ArrowRight') updatePdfViewer(currentPdfPage + 1);
+    if (e.key === 'ArrowLeft') updatePdfViewer(currentPdfPage - 1);
+  });
+
+  // ==========================================
+  // 2. UNIVERSAL LIGHTBOX / MODAL
+  // ==========================================
+  const modal = document.getElementById('universalModal');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalImg = document.getElementById('modalImg');
+  const modalDownloadBtn = document.getElementById('modalDownloadBtn');
+  const modalCloseBtn = document.getElementById('modalCloseBtn');
+
+  function openModal(title, imgSrc, downloadSrc) {
+    if (!modal) return;
+    modalTitle.textContent = title;
+    modalImg.src = imgSrc;
+    modalImg.alt = title;
+    modalDownloadBtn.href = downloadSrc || imgSrc;
+    modalDownloadBtn.setAttribute('download', (downloadSrc || imgSrc).split('/').pop());
+
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      if (modalImg) modalImg.src = '';
+    }, 200);
+  }
+
+  if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+  }
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && modal.classList.contains('open')) {
+      closeModal();
+    }
+  });
+
+  // Attach modal trigger to any element with data-modal-src
+  document.querySelectorAll('[data-modal-src]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const title = el.dataset.modalTitle || 'Visualização do Material';
+      const src = el.dataset.modalSrc;
+      const download = el.dataset.modalDownload || src;
+      openModal(title, src, download);
+    });
+  });
+
+  // ==========================================
+  // 3. GALLERY FILTER TABS
+  // ==========================================
+  const filterTabs = document.querySelectorAll('.gallery-tab-btn');
+  const galleryItems = document.querySelectorAll('.gallery-card-item');
+
+  filterTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      filterTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      const filter = tab.dataset.filter;
+
+      galleryItems.forEach(item => {
+        if (filter === 'all' || item.dataset.category === filter) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // ==========================================
+  // 4. MOBILE NAVIGATION DRAWER
+  // ==========================================
+  const btnMobileMenu = document.getElementById('btnMobileMenu');
+  const mobileDrawer = document.getElementById('mobileDrawer');
+  const drawerLinks = document.querySelectorAll('.mobile-drawer-link');
+
+  if (btnMobileMenu && mobileDrawer) {
+    btnMobileMenu.addEventListener('click', () => {
+      const isOpen = mobileDrawer.classList.toggle('open');
+      btnMobileMenu.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      btnMobileMenu.textContent = isOpen ? '✕' : '☰';
+    });
+
+    drawerLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileDrawer.classList.remove('open');
+        btnMobileMenu.textContent = '☰';
+      });
+    });
+  }
+
+  // ==========================================
+  // 5. STICKY HEADER & SCROLL SPY
+  // ==========================================
+  const headerNav = document.querySelector('.header-nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 30) {
+      headerNav?.classList.add('scrolled');
+    } else {
+      headerNav?.classList.remove('scrolled');
+    }
+  }, { passive: true });
+
+  // ==========================================
+  // 6. SHARE HANDLER (WHATSAPP / NATIVE SHARE)
+  // ==========================================
+  const shareButtons = document.querySelectorAll('.btn-share-campaign');
+  const shareData = {
+    title: 'CHAPA 2 • NOVA VISÃO | Villa do Pescador',
+    text: 'Confira as propostas, a equipe e o Plano de Gestão Oficial da CHAPA 2 para o Condomínio Villa do Pescador! Vote em quem tem experiência comprovada.',
+    url: window.location.href
+  };
+
+  shareButtons.forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+          showToast('Compartilhado com sucesso!');
+        } catch (err) {
+          if (err.name !== 'AbortError') {
+            fallbackWhatsAppShare();
+          }
+        }
+      } else {
+        fallbackWhatsAppShare();
+      }
+    });
+  });
+
+  function fallbackWhatsAppShare() {
+    const textMsg = encodeURIComponent(
+      `*CHAPA 2 • NOVA VISÃO — Villa do Pescador*\n` +
+      `Conheça os projetos, a equipe e o Plano de Gestão Oficial em PDF para o nosso condomínio:\n` +
+      `${window.location.href}`
+    );
+    const waUrl = `https://api.whatsapp.com/send?text=${textMsg}`;
+    window.open(waUrl, '_blank');
+  }
+
+  // ==========================================
+  // 7. TOAST NOTIFICATION UTILITY
+  // ==========================================
+  const toast = document.getElementById('toastMsg');
+  function showToast(msg) {
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3200);
+  }
+
+  // Initial call to set active page 1
+  updatePdfViewer(1);
+});

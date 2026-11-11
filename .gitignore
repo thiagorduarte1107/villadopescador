@@ -1,0 +1,7 @@
+extracted_chat/
+*.zip
+__pycache__/
+*.pyc
+.gemini/
+.env*
+node_modules/

@@ -1,0 +1,8 @@
+extracted_chat/
+*.zip
+*.py
+*.tmp
+.git
+.github
+node_modules
+.gemini

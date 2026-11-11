@@ -30,56 +30,7 @@
   <!-- Acessibilidade: Atalho direto para o conteúdo -->
   <a href="#plano-gestao" class="skip-link">Pular para o Plano de Gestão Oficial</a>
 
-  <!-- ==========================================
-       HEADER & NAVIGATION
-       ========================================== -->
-  <header class="header-nav">
-    <div class="container nav-inner">
-      <a href="#inicio" class="nav-brand">
-        <img src="assets/images/logo/logo.webp" alt="Logo Villa do Pescador" class="nav-brand-logo" width="120" height="48">
-        <div class="badge-chapa2">
-          <span class="badge-chapa2-tag">CHAPA 2</span>
-          <span class="badge-chapa2-sub">Nova Visão</span>
-        </div>
-      </a>
 
-      <nav class="nav-menu">
-        <ul class="nav-links">
-          <li><a href="#inicio" class="nav-link">Início</a></li>
-          <li><a href="#plano-gestao" class="nav-link" style="color: var(--color-gold);">📄 Plano de Gestão (PDF)</a></li>
-          <li><a href="#equipe" class="nav-link">Nossa Equipe</a></li>
-          <li><a href="#propostas" class="nav-link">Propostas</a></li>
-          <li><a href="#galeria" class="nav-link">Cards & Flyers</a></li>
-          <li><a href="#como-votar" class="nav-link">Como Votar</a></li>
-        </ul>
-      </nav>
-
-      <div class="nav-actions">
-        <a href="assets/pdf/Plano_de_Gestao_Chapa2_Villa_do_Pescador.pdf" download class="btn-header-pdf">
-          <span>📥 Baixar PDF</span>
-        </a>
-        <button type="button" class="btn-mobile-menu" id="btnMobileMenu" aria-label="Abrir Menu">
-          ☰
-        </button>
-      </div>
-    </div>
-
-    <!-- Mobile Slide Drawer -->
-    <div class="mobile-drawer" id="mobileDrawer">
-      <a href="#inicio" class="mobile-drawer-link">🏛️ Início</a>
-      <a href="#plano-gestao" class="mobile-drawer-link" style="color: var(--color-gold);">📄 Plano de Gestão Oficial (PDF)</a>
-      <a href="#equipe" class="mobile-drawer-link">👥 Nossa Equipe & Organograma</a>
-      <a href="#propostas" class="mobile-drawer-link">💡 Eixos e Propostas de Gestão</a>
-      <a href="#galeria" class="mobile-drawer-link">📢 Galeria de Cards & Flyers</a>
-      <a href="#como-votar" class="mobile-drawer-link">🗳️ Guia de Votação & Procurações</a>
-      <a href="assets/pdf/Plano_de_Gestao_Chapa2_Villa_do_Pescador.pdf" download class="btn-primary-gold" style="margin-top: 10px; width: 100%;">
-        📥 Baixar Plano Oficial em PDF
-      </a>
-      <button type="button" class="btn-secondary-glass btn-share-campaign" style="width: 100%;">
-        📲 Compartilhar no WhatsApp
-      </button>
-    </div>
-  </header>
 
   <!-- ==========================================
        HERO SECTION
@@ -89,6 +40,15 @@
     <div class="hero-glow-sphere"></div>
 
     <div class="container hero-content">
+      <!-- Top Brand Badge -->
+      <div style="margin-bottom: 22px; display: inline-flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap;">
+        <img src="assets/images/logo/logo.webp" alt="Villa do Pescador" style="height: 54px; width: auto; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.6));">
+        <div class="badge-chapa2">
+          <span class="badge-chapa2-tag">CHAPA 2</span>
+          <span class="badge-chapa2-sub">Nova Visão</span>
+        </div>
+      </div>
+
       <div class="hero-pretitle">
         <span class="badge-pill">🗳️ ELEIÇÕES ASSOCIAÇÃO VILLA DO PESCADOR 2026</span>
       </div>
@@ -323,189 +283,247 @@
   </section>
 
   <!-- ==========================================
-       SECTION 2: NOSSA EQUIPE & ORGANOGRAMA
+       SECTION 2: NOSSA EQUIPE & CORPO DIRETIVO (CARROSSEL MODERNO)
        ========================================== -->
   <section class="section-wrapper" id="equipe">
     <div class="container">
       <div class="section-head">
         <span class="badge-pill">👥 NOSSA EQUIPE OFICIAL</span>
-        <h2 class="section-title">Composição da CHAPA 2</h2>
+        <h2 class="section-title">Corpo Diretivo da CHAPA 2</h2>
         <p class="section-subtitle">
-          Uma equipe multidisciplinar com experiência comprovada de gestão, servidores públicos, profissionais liberais e moradores comprometidos com o zelo pelo patrimônio do condomínio.
+          Conheça cada membro da nossa chapa: gestores com experiência comprovada de síndico, servidores públicos, especialistas em finanças e saúde prontos para cuidar do Villa do Pescador.
         </p>
       </div>
 
-      <div class="team-container">
-        <!-- Tier 1: Diretoria Executiva -->
-        <div>
-          <div class="team-tier-title">DIRETORIA EXECUTIVA</div>
-          <div class="team-grid-exec">
-            <!-- Claubevanio Barros -->
-            <div class="member-card president-highlight">
-              <div class="member-head">
-                <img src="assets/images/candidates/claubevanio.webp" alt="Claubevanio Barros" class="member-avatar">
-                <div>
-                  <div class="member-role-tag">Candidato a Presidente</div>
-                  <div class="member-name">Claubevanio Barros</div>
-                  <div class="member-qualif">Empresário • Gestão Financeira • Síndico com 5 Anos de Atuação</div>
+      <!-- Carousel Container: Team -->
+      <div class="carousel-wrapper" id="teamCarouselWrapper" role="region" aria-roledescription="carousel" aria-label="Carrossel do Corpo Diretivo da Chapa 2">
+        <!-- Carousel Control Header -->
+        <div class="carousel-top-bar">
+          <div class="carousel-counter-badge" id="teamCarouselCounter">
+            <span>Membro</span>
+            <strong class="carousel-current">1</strong>
+            <span>de</span>
+            <strong class="carousel-total">7</strong>
+          </div>
+
+          <div class="carousel-nav-arrows">
+            <button type="button" class="btn-carousel-nav" id="btnTeamPrev" aria-label="Membro Anterior">
+              ‹
+            </button>
+            <button type="button" class="btn-carousel-nav" id="btnTeamNext" aria-label="Próximo Membro">
+              ›
+            </button>
+          </div>
+        </div>
+
+        <!-- Carousel Track Viewport -->
+        <div class="carousel-track-container">
+          <div class="carousel-track" id="teamCarouselTrack" tabindex="0" aria-label="Lista de membros do corpo diretivo">
+            <!-- 1. Claubevanio Barros -->
+            <div class="carousel-slide" data-slide-index="1">
+              <div class="member-card president-highlight">
+                <div class="member-tier-pill">👑 Diretoria Executiva</div>
+                <div class="member-head">
+                  <img src="assets/images/candidates/claubevanio.webp" alt="Claubevanio Barros" class="member-avatar">
+                  <div>
+                    <div class="member-role-tag">Candidato a Presidente</div>
+                    <div class="member-name">Claubevanio Barros</div>
+                    <div class="member-qualif">Empresário • Gestão Financeira • Síndico com 5 Anos de Atuação</div>
+                  </div>
                 </div>
+                <p class="member-bio">
+                  Atualmente síndico do Condomínio Parque Brasília com gestão aprovada e histórico de 2 mandatos como subsíndico. Traz competência prática em negociação, redução de desperdícios e execução de melhorias sem aumentos injustificados de taxa.
+                </p>
+                <ul class="member-highlights">
+                  <li>Gestão responsável e 100% transparente com auditoria digital</li>
+                  <li>Foco em segurança, portaria moderna e organização das áreas de lazer</li>
+                  <li>Participação ativa de todos os moradores nas decisões relevantes</li>
+                </ul>
+                <button type="button" class="btn-view-card" data-modal-title="Ficha Oficial: Claubevanio Barros (Presidente)" data-modal-src="assets/images/individual/card_claubevanio.webp" data-modal-download="assets/images/individual/card_claubevanio.png">
+                  🔍 Ver Apresentação Completa
+                </button>
               </div>
-              <p class="member-bio">
-                Atualmente síndico do Condomínio Parque Brasília com gestão aprovada e histórico de 2 mandatos como subsíndico. Traz competência prática em negociação, redução de desperdícios e execução de melhorias sem aumentos injustificados de taxa.
-              </p>
-              <ul class="member-highlights">
-                <li>Gestão responsável e 100% transparente com auditoria digital</li>
-                <li>Foco em segurança, portaria moderna e organização das áreas de lazer</li>
-                <li>Participação ativa de todos os moradores nas decisões relevantes</li>
-              </ul>
-              <button type="button" class="btn-view-card" data-modal-title="Ficha Oficial: Claubevanio Barros" data-modal-src="assets/images/individual/card_claubevanio.webp" data-modal-download="assets/images/individual/card_claubevanio.png">
-                🔍 Ver Apresentação Completa
-              </button>
             </div>
 
-            <!-- Vanessa Cardoso -->
-            <div class="member-card">
-              <div class="member-head">
-                <img src="assets/images/candidates/vanessa.webp" alt="Vanessa Cardoso" class="member-avatar">
-                <div>
-                  <div class="member-role-tag">Candidata a Vice-Presidente</div>
-                  <div class="member-name">Vanessa Cardoso</div>
-                  <div class="member-qualif">Gestão Estratégica • Parceria Ativa • Articulação</div>
+            <!-- 2. Vanessa Cardoso -->
+            <div class="carousel-slide" data-slide-index="2">
+              <div class="member-card">
+                <div class="member-tier-pill">🤝 Diretoria Executiva</div>
+                <div class="member-head">
+                  <img src="assets/images/candidates/vanessa.webp" alt="Vanessa Cardoso" class="member-avatar">
+                  <div>
+                    <div class="member-role-tag">Candidata a Vice-Presidente</div>
+                    <div class="member-name">Vanessa Cardoso</div>
+                    <div class="member-qualif">Gestão Estratégica • Parceria Ativa • Articulação</div>
+                  </div>
                 </div>
+                <p class="member-bio">
+                  Proprietária e moradora presente com escuta atenta aos anseios da comunidade. Atua no alinhamento contínuo entre a diretoria e as famílias, fortalecendo a harmonia condominial e a fiscalização do cumprimento das regras de convivência.
+                </p>
+                <ul class="member-highlights">
+                  <li>Canal aberto permanente de escuta e diálogo com os moradores</li>
+                  <li>Valorização do convívio familiar, esportivo e recreativo do Villa</li>
+                  <li>Articulação para execução ágil de todos os projetos da Chapa 2</li>
+                </ul>
+                <button type="button" class="btn-view-card" data-modal-title="Ficha Oficial: Vanessa Cardoso (Vice-Presidente)" data-modal-src="assets/images/individual/card_vanessa.webp" data-modal-download="assets/images/individual/card_vanessa.png">
+                  🔍 Ver Apresentação Completa
+                </button>
               </div>
-              <p class="member-bio">
-                Proprietária e moradora presente com escuta atenta aos anseios da comunidade. Atua no alinhamento contínuo entre a diretoria e as famílias, fortalecendo a harmonia condominial e a fiscalização do cumprimento das regras de convivência.
-              </p>
-              <ul class="member-highlights">
-                <li>Canal aberto permanente de escuta e diálogo com os moradores</li>
-                <li>Valorização do convívio familiar, esportivo e recreativo do Villa</li>
-                <li>Articulação para execução ágil de todos os projetos da Chapa 2</li>
-              </ul>
-              <button type="button" class="btn-view-card" data-modal-title="Ficha Oficial: Vanessa Cardoso" data-modal-src="assets/images/individual/card_vanessa.webp" data-modal-download="assets/images/individual/card_vanessa.png">
-                🔍 Ver Apresentação Completa
-              </button>
+            </div>
+
+            <!-- 3. Almir Antônio -->
+            <div class="carousel-slide" data-slide-index="3">
+              <div class="member-card">
+                <div class="member-tier-pill">⚖️ Conselho Fiscal</div>
+                <div class="member-head">
+                  <div class="member-avatar-icon">⚖️</div>
+                  <div>
+                    <div class="member-role-tag">Presidente do Conselho</div>
+                    <div class="member-name" style="font-size: 1.15rem;">Almir Antônio</div>
+                    <div class="member-qualif">Servidor Público Federal • Compliance</div>
+                  </div>
+                </div>
+                <p class="member-bio">
+                  Experiência consolidada no serviço público federal e rigor institucional para assegurar a conformidade estatutária, a legalidade estrita de cada ato da administração e a prestação de contas mensal impecável.
+                </p>
+                <ul class="member-highlights">
+                  <li>Rigor orçamentário e conformidade estatutária estrita</li>
+                  <li>Fiscalização prévia de cada balancete e contrato</li>
+                  <li>Zelo intransigente pelo patrimônio coletivo</li>
+                </ul>
+                <button type="button" class="btn-view-card" data-modal-title="Ficha Oficial: Almir Antônio (Conselho Fiscal)" data-modal-src="assets/images/cards/card_6_equipe_oficial.webp" data-modal-download="assets/images/cards/card_6_equipe_oficial.png">
+                  🔍 Ver Apresentação Completa
+                </button>
+              </div>
+            </div>
+
+            <!-- 4. Kênia Cristina -->
+            <div class="carousel-slide" data-slide-index="4">
+              <div class="member-card">
+                <div class="member-tier-pill">⚖️ Conselho Fiscal</div>
+                <div class="member-head">
+                  <img src="assets/images/candidates/kenia.webp" alt="Kênia Cristina" class="member-avatar" style="width: 78px; height: 78px;">
+                  <div>
+                    <div class="member-role-tag">2º Membro Fiscal</div>
+                    <div class="member-name" style="font-size: 1.15rem;">Kênia Cristina</div>
+                    <div class="member-qualif">Fiscalização Financeira & Controle</div>
+                  </div>
+                </div>
+                <p class="member-bio">
+                  Acompanhamento minucioso de orçamentos, auditoria prévia de cada nota fiscal emitida e defesa intransigente do dinheiro dos proprietários do condomínio Villa do Pescador.
+                </p>
+                <ul class="member-highlights">
+                  <li>Cotação tríplice obrigatória para toda despesa</li>
+                  <li>Prestação de contas mensal aberta e acessível</li>
+                  <li>Zelo permanente pelo fundo de reserva condominial</li>
+                </ul>
+                <button type="button" class="btn-view-card" data-modal-title="Ficha Oficial: Kênia Cristina (Conselho Fiscal)" data-modal-src="assets/images/individual/card_kenia.webp" data-modal-download="assets/images/individual/card_kenia.png">
+                  🔍 Ver Apresentação Completa
+                </button>
+              </div>
+            </div>
+
+            <!-- 5. Ronny Santos -->
+            <div class="carousel-slide" data-slide-index="5">
+              <div class="member-card">
+                <div class="member-tier-pill">⚖️ Conselho Fiscal</div>
+                <div class="member-head">
+                  <div class="member-avatar-icon">📊</div>
+                  <div>
+                    <div class="member-role-tag">3º Membro Fiscal</div>
+                    <div class="member-name" style="font-size: 1.15rem;">Ronny Santos</div>
+                    <div class="member-qualif">Gerente Comercial • Contratos</div>
+                  </div>
+                </div>
+                <p class="member-bio">
+                  Visão comercial estratégica, poder de negociação para barateamento de insumos e contratos essenciais de manutenção e zelo contínuo pela sustentabilidade financeira da Associação.
+                </p>
+                <ul class="member-highlights">
+                  <li>Melhor preço e combate firme a sobrepreço</li>
+                  <li>Otimização contínua de contratos e prestadores</li>
+                  <li>Eficiência na aplicação de cada recurso condominial</li>
+                </ul>
+                <button type="button" class="btn-view-card" data-modal-title="Ficha Oficial: Ronny Santos (Conselho Fiscal)" data-modal-src="assets/images/cards/card_6_equipe_oficial.webp" data-modal-download="assets/images/cards/card_6_equipe_oficial.png">
+                  🔍 Ver Apresentação Completa
+                </button>
+              </div>
+            </div>
+
+            <!-- 6. Rennê Veríssimo -->
+            <div class="carousel-slide" data-slide-index="6">
+              <div class="member-card">
+                <div class="member-tier-pill">🛡️ Suplência</div>
+                <div class="member-head">
+                  <img src="assets/images/candidates/rene.webp" alt="Rennê Veríssimo" class="member-avatar" style="width: 78px; height: 78px;">
+                  <div>
+                    <div class="member-role-tag">Suplente da Chapa</div>
+                    <div class="member-name" style="font-size: 1.15rem;">Rennê Veríssimo</div>
+                    <div class="member-qualif">Enfermeiro • Gestão Humanizada</div>
+                  </div>
+                </div>
+                <p class="member-bio">
+                  Vocação na área da saúde e defesa do cuidado humanizado. Responsável pelo suporte técnico à implementação do Espaço Sensorial TEA, acessibilidade plena e segurança preventiva de eventos.
+                </p>
+                <ul class="member-highlights">
+                  <li>Acolhimento de famílias e crianças atípicas (TEA)</li>
+                  <li>Rampas acessíveis e conformidade NBR 9050</li>
+                  <li>Protocolos preventivos em eventos e áreas comuns</li>
+                </ul>
+                <button type="button" class="btn-view-card" data-modal-title="Ficha Oficial: Rennê Veríssimo (Suplente)" data-modal-src="assets/images/individual/card_rene.webp" data-modal-download="assets/images/individual/card_rene.png">
+                  🔍 Ver Apresentação Completa
+                </button>
+              </div>
+            </div>
+
+            <!-- 7. Ângela Nava de Lira -->
+            <div class="carousel-slide" data-slide-index="7">
+              <div class="member-card">
+                <div class="member-tier-pill">🛡️ Suplência</div>
+                <div class="member-head">
+                  <img src="assets/images/candidates/angela.webp" alt="Ângela Nava" class="member-avatar" style="width: 78px; height: 78px;">
+                  <div>
+                    <div class="member-role-tag">Suplente da Chapa</div>
+                    <div class="member-name" style="font-size: 1.15rem;">Ângela Nava de Lira</div>
+                    <div class="member-qualif">Servidora Pública • Compliance Legal</div>
+                  </div>
+                </div>
+                <p class="member-bio">
+                  Atuação em direito público e processos institucionais. Liderança técnica na cobrança diária perante a Equatorial Energia (normas técnicas NT.002 e NT.004) e cumprimento de obrigações da Construtora.
+                </p>
+                <ul class="member-highlights">
+                  <li>Cobrança técnica e jurídica firme à Equatorial Energia</li>
+                  <li>Exigência das obras de infraestrutura da Construtora</li>
+                  <li>Transparência jurídica e conformidade contratual</li>
+                </ul>
+                <button type="button" class="btn-view-card" data-modal-title="Ficha Oficial: Ângela Nava (Suplente)" data-modal-src="assets/images/individual/card_angela.webp" data-modal-download="assets/images/individual/card_angela.png">
+                  🔍 Ver Apresentação Completa
+                </button>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Tier 2: Conselho Fiscal -->
-        <div>
-          <div class="team-tier-title">CONSELHO FISCAL TITULAR</div>
-          <div class="team-grid-fiscal">
-            <!-- Almir Antônio -->
-            <div class="member-card">
-              <div class="member-head">
-                <div class="member-avatar-icon">⚖️</div>
-                <div>
-                  <div class="member-role-tag">Presidente do Conselho</div>
-                  <div class="member-name" style="font-size: 1.15rem;">Almir Antônio</div>
-                  <div class="member-qualif">Servidor Público Federal</div>
-                </div>
-              </div>
-              <p class="member-bio">
-                Experiência no serviço público e rigor institucional para assegurar a conformidade estatutária, a legalidade de cada ato da administração e a prestação de contas impecável.
-              </p>
-              <ul class="member-highlights">
-                <li>Rigor orçamentário estrito</li>
-                <li>Conformidade legal e estatutária</li>
-              </ul>
-            </div>
-
-            <!-- Kênia Cristina -->
-            <div class="member-card">
-              <div class="member-head">
-                <img src="assets/images/candidates/kenia.webp" alt="Kênia Cristina" class="member-avatar" style="width: 68px; height: 68px; min-width: 68px;">
-                <div>
-                  <div class="member-role-tag">2º Membro Fiscal</div>
-                  <div class="member-name" style="font-size: 1.15rem;">Kênia Cristina</div>
-                  <div class="member-qualif">Fiscalização Financeira & Controle</div>
-                </div>
-              </div>
-              <p class="member-bio">
-                Acompanhamento minucioso de orçamentos, auditoria prévia de cada nota fiscal e defesa intransigente do patrimônio dos proprietários do Villa do Pescador.
-              </p>
-              <ul class="member-highlights">
-                <li>Cotação tríplice obrigatória</li>
-                <li>Prestação de contas mensal aberta</li>
-              </ul>
-              <button type="button" class="btn-view-card" data-modal-title="Ficha Oficial: Kênia Cristina" data-modal-src="assets/images/individual/card_kenia.webp" data-modal-download="assets/images/individual/card_kenia.png">
-                🔍 Ver Apresentação
-              </button>
-            </div>
-
-            <!-- Ronny Santos -->
-            <div class="member-card">
-              <div class="member-head">
-                <div class="member-avatar-icon">📊</div>
-                <div>
-                  <div class="member-role-tag">3º Membro Fiscal</div>
-                  <div class="member-name" style="font-size: 1.15rem;">Ronny Santos</div>
-                  <div class="member-qualif">Gerente Comercial</div>
-                </div>
-              </div>
-              <p class="member-bio">
-                Visão comercial estratégica, poder de negociação para barateamento de insumos e contratos de manutenção e zelo pela sustentabilidade financeira da Associação.
-              </p>
-              <ul class="member-highlights">
-                <li>Melhor preço e combate a sobrepreço</li>
-                <li>Otimização contínua de contratos</li>
-              </ul>
-            </div>
-          </div>
+        <!-- Carousel Dots Indicator (7 Dots) -->
+        <div class="carousel-dots" id="teamCarouselDots" aria-label="Navegação pelos membros">
+          <button type="button" class="carousel-dot active" data-index="0" aria-label="Ir para membro 1: Claubevanio Barros"></button>
+          <button type="button" class="carousel-dot" data-index="1" aria-label="Ir para membro 2: Vanessa Cardoso"></button>
+          <button type="button" class="carousel-dot" data-index="2" aria-label="Ir para membro 3: Almir Antônio"></button>
+          <button type="button" class="carousel-dot" data-index="3" aria-label="Ir para membro 4: Kênia Cristina"></button>
+          <button type="button" class="carousel-dot" data-index="4" aria-label="Ir para membro 5: Ronny Santos"></button>
+          <button type="button" class="carousel-dot" data-index="5" aria-label="Ir para membro 6: Rennê Veríssimo"></button>
+          <button type="button" class="carousel-dot" data-index="6" aria-label="Ir para membro 7: Ângela Nava"></button>
         </div>
+      </div>
 
-        <!-- Tier 3: Suplentes -->
+      <!-- Team Commitment Banner -->
+      <div class="team-commitment-box" style="margin-top: 36px;">
+        <div class="comm-badge-icon">🤝</div>
         <div>
-          <div class="team-tier-title">SUPLENTES</div>
-          <div class="team-grid-suplentes">
-            <!-- Renne Veríssimo -->
-            <div class="member-card">
-              <div class="member-head">
-                <img src="assets/images/candidates/rene.webp" alt="Rennê Veríssimo" class="member-avatar" style="width: 68px; height: 68px; min-width: 68px;">
-                <div>
-                  <div class="member-role-tag">Suplente da Chapa</div>
-                  <div class="member-name" style="font-size: 1.15rem;">Rennê Veríssimo</div>
-                  <div class="member-qualif">Enfermeiro • Gestão Humanizada</div>
-                </div>
-              </div>
-              <p class="member-bio">
-                Vocação na área da saúde e defesa do cuidado humanizado. Responsável pelo suporte à implementação do Espaço Sensorial TEA, acessibilidade plena e segurança preventiva de eventos.
-              </p>
-              <button type="button" class="btn-view-card" data-modal-title="Ficha Oficial: Rennê Veríssimo" data-modal-src="assets/images/individual/card_rene.webp" data-modal-download="assets/images/individual/card_rene.png">
-                🔍 Ver Apresentação
-              </button>
-            </div>
-
-            <!-- Ângela Nava -->
-            <div class="member-card">
-              <div class="member-head">
-                <img src="assets/images/candidates/angela.webp" alt="Ângela Nava" class="member-avatar" style="width: 68px; height: 68px; min-width: 68px;">
-                <div>
-                  <div class="member-role-tag">Suplente da Chapa</div>
-                  <div class="member-name" style="font-size: 1.15rem;">Ângela Nava de Lira</div>
-                  <div class="member-qualif">Servidora Pública • Compliance Legal</div>
-                </div>
-              </div>
-              <p class="member-bio">
-                Atuação em direito público e processos institucionais. Foco na cobrança técnica rigorosa perante a Equatorial Energia (normas NT.002 e NT.004) e cumprimento de obrigações da Construtora.
-              </p>
-              <button type="button" class="btn-view-card" data-modal-title="Ficha Oficial: Ângela Nava" data-modal-src="assets/images/individual/card_angela.webp" data-modal-download="assets/images/individual/card_angela.png">
-                🔍 Ver Apresentação
-              </button>
-            </div>
+          <div class="comm-title">
+            Compromisso Coletivo da <strong>CHAPA 2</strong> com o Morador
           </div>
-        </div>
-
-        <!-- Team Commitment Banner -->
-        <div class="team-commitment-box">
-          <div class="comm-badge-icon">🤝</div>
-          <div>
-            <div class="comm-title">
-              Compromisso Coletivo da <strong>CHAPA 2</strong> com o Morador
-            </div>
-            <div class="comm-sub">
-              Nenhum morador sem resposta • Nenhuma despesa sem cotação prévia • Nenhum projeto sem viabilidade real.
-            </div>
+          <div class="comm-sub">
+            Nenhum morador sem resposta • Nenhuma despesa sem cotação prévia • Nenhum projeto sem viabilidade real.
           </div>
         </div>
       </div>
@@ -513,7 +531,7 @@
   </section>
 
   <!-- ==========================================
-       SECTION 3: EIXOS & PROPOSTAS DE GESTÃO
+       SECTION 3: EIXOS & PROPOSTAS DE GESTÃO (CARROSSEL MODERNO)
        ========================================== -->
   <section class="section-wrapper" id="propostas" style="background: rgba(1, 16, 8, 0.7);">
     <div class="container">
@@ -521,147 +539,246 @@
         <span class="badge-pill">💡 PROPOSTAS COM VIABILIDADE</span>
         <h2 class="section-title">Eixos Estratégicos de Gestão</h2>
         <p class="section-subtitle">
-          Projetos desenhados para atender às necessidades reais do condomínio, gerando valorização patrimonial, conforto diário, segurança náutica e equilíbrio financeiro.
+          Projetos estruturados para atender às necessidades reais do condomínio: valorização patrimonial, conforto diário, segurança náutica e equilíbrio financeiro. Deslize para ver todos os 8 cards oficiais.
         </p>
       </div>
 
-      <div class="proposals-grid">
-        <!-- 1. Minimercado -->
-        <div class="proposal-card">
-          <div class="proposal-card-thumb-wrap">
-            <img src="assets/images/cards/card_1_minimercado.webp" alt="Minimercado Autônomo" class="proposal-card-thumb" loading="lazy">
-            <span class="proposal-tag-badge">🛒 CONVENIÊNCIA 24H</span>
+      <!-- Carousel Container: Proposals -->
+      <div class="carousel-wrapper" id="proposalsCarouselWrapper" role="region" aria-roledescription="carousel" aria-label="Carrossel de Propostas da Chapa 2">
+        <!-- Carousel Control Header -->
+        <div class="carousel-top-bar">
+          <div class="carousel-counter-badge" id="proposalsCarouselCounter">
+            <span>Proposta</span>
+            <strong class="carousel-current">1</strong>
+            <span>de</span>
+            <strong class="carousel-total">8</strong>
           </div>
-          <div class="proposal-card-body">
-            <h3 class="proposal-title">Minimercado Autônomo 24 Horas</h3>
-            <div class="proposal-tagline">Custo Zero de Instalação para o Condomínio</div>
-            <p class="proposal-desc">
-              Parceria com rede consolidada no modelo de comodato. Produtos essenciais, bebidas, gelo e mercearia sem precisar sair do condomínio.
-            </p>
-            <ul class="proposal-key-points">
-              <li><span class="bullet">✓</span> Custo zero de instalação e manutenção</li>
-              <li><span class="bullet">✓</span> Receita comercial de vendas revertida para o caixa do condomínio</li>
-              <li><span class="bullet">✓</span> Funcionamento ininterrupto 24h com segurança eletrônica</li>
-            </ul>
-            <button type="button" class="btn-open-proposal-card" data-modal-title="Card Oficial: Minimercado Autônomo" data-modal-src="assets/images/cards/card_1_minimercado.webp" data-modal-download="assets/images/cards/card_1_minimercado.png">
-              🔍 Ver Card Completo
+
+          <div class="carousel-nav-arrows">
+            <button type="button" class="btn-carousel-nav" id="btnPropPrev" aria-label="Proposta Anterior">
+              ‹
+            </button>
+            <button type="button" class="btn-carousel-nav" id="btnPropNext" aria-label="Próxima Proposta">
+              ›
             </button>
           </div>
         </div>
 
-        <!-- 2. Baias de Lazer -->
-        <div class="proposal-card">
-          <div class="proposal-card-thumb-wrap">
-            <img src="assets/images/cards/card_2_baias_lazer.webp" alt="Baias de Lazer Náutico" class="proposal-card-thumb" loading="lazy">
-            <span class="proposal-tag-badge">⛵ LAZER & FAMÍLIA</span>
-          </div>
-          <div class="proposal-card-body">
-            <h3 class="proposal-title">Baias de Lazer Náutico & Quiosques</h3>
-            <div class="proposal-tagline">Convivência Familiar com Privacidade</div>
-            <p class="proposal-desc">
-              Criação de quiosques gourmet estruturados com pia, churrasqueira e pergolado, voltados para o lago, permitindo eventos simultâneos sem conflitos.
-            </p>
-            <ul class="proposal-key-points">
-              <li><span class="bullet">✓</span> Quiosques gourmet individuais com infraestrutura completa</li>
-              <li><span class="bullet">✓</span> Privacidade acústica e respeito às normas de silêncio</li>
-              <li><span class="bullet">✓</span> Valorização imediata de todas as unidades do condomínio</li>
-            </ul>
-            <button type="button" class="btn-open-proposal-card" data-modal-title="Card Oficial: Baias de Lazer Náutico" data-modal-src="assets/images/cards/card_2_baias_lazer.webp" data-modal-download="assets/images/cards/card_2_baias_lazer.png">
-              🔍 Ver Card Completo
-            </button>
+        <!-- Carousel Track Viewport -->
+        <div class="carousel-track-container">
+          <div class="carousel-track" id="proposalsCarouselTrack" tabindex="0" aria-label="Lista de propostas da Chapa 2">
+            <!-- 1. Minimercado -->
+            <div class="carousel-slide" data-slide-index="1">
+              <div class="proposal-card">
+                <div class="proposal-card-thumb-wrap">
+                  <img src="assets/images/cards/card_1_minimercado.webp" alt="Minimercado Autônomo" class="proposal-card-thumb" loading="lazy">
+                  <span class="proposal-tag-badge">🛒 CONVENIÊNCIA 24H</span>
+                </div>
+                <div class="proposal-card-body">
+                  <h3 class="proposal-title">Minimercado Autônomo 24 Horas</h3>
+                  <div class="proposal-tagline">Custo Zero de Instalação para o Condomínio</div>
+                  <p class="proposal-desc">
+                    Parceria com rede consolidada no modelo de comodato. Produtos essenciais, bebidas, gelo e mercearia sem precisar sair do condomínio.
+                  </p>
+                  <ul class="proposal-key-points">
+                    <li><span class="bullet">✓</span> Custo zero de instalação e manutenção</li>
+                    <li><span class="bullet">✓</span> Receita comercial de vendas revertida para o condomínio</li>
+                    <li><span class="bullet">✓</span> Funcionamento ininterrupto 24h com segurança eletrônica</li>
+                  </ul>
+                  <button type="button" class="btn-open-proposal-card" data-modal-title="Card Oficial: Minimercado Autônomo" data-modal-src="assets/images/cards/card_1_minimercado.webp" data-modal-download="assets/images/cards/card_1_minimercado.png">
+                    🔍 Ver Card Completo
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Baias de Lazer -->
+            <div class="carousel-slide" data-slide-index="2">
+              <div class="proposal-card">
+                <div class="proposal-card-thumb-wrap">
+                  <img src="assets/images/cards/card_2_baias_lazer.webp" alt="Baias de Lazer Náutico" class="proposal-card-thumb" loading="lazy">
+                  <span class="proposal-tag-badge">⛵ LAZER & FAMÍLIA</span>
+                </div>
+                <div class="proposal-card-body">
+                  <h3 class="proposal-title">Baias de Lazer Náutico & Quiosques</h3>
+                  <div class="proposal-tagline">Convivência Familiar com Privacidade</div>
+                  <p class="proposal-desc">
+                    Criação de quiosques gourmet estruturados com pia, churrasqueira e pergolado, voltados para o lago, permitindo eventos simultâneos sem conflitos.
+                  </p>
+                  <ul class="proposal-key-points">
+                    <li><span class="bullet">✓</span> Quiosques gourmet individuais com infraestrutura completa</li>
+                    <li><span class="bullet">✓</span> Privacidade acústica e respeito às normas de silêncio</li>
+                    <li><span class="bullet">✓</span> Valorização imediata de todas as unidades do condomínio</li>
+                  </ul>
+                  <button type="button" class="btn-open-proposal-card" data-modal-title="Card Oficial: Baias de Lazer Náutico" data-modal-src="assets/images/cards/card_2_baias_lazer.webp" data-modal-download="assets/images/cards/card_2_baias_lazer.png">
+                    🔍 Ver Card Completo
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Recicla Villa -->
+            <div class="carousel-slide" data-slide-index="3">
+              <div class="proposal-card">
+                <div class="proposal-card-thumb-wrap">
+                  <img src="assets/images/cards/card_3_recicla_villa.webp" alt="Recicla Villa" class="proposal-card-thumb" loading="lazy">
+                  <span class="proposal-tag-badge">♻️ ECONOMIA CIRCULAR</span>
+                </div>
+                <div class="proposal-card-body">
+                  <h3 class="proposal-title">Recicla Villa: Gestão de Resíduos</h3>
+                  <div class="proposal-tagline">R$ 3,00 /kg Pago Direto ao Morador Participante</div>
+                  <p class="proposal-desc">
+                    Programa moderno de coleta seletiva e valorização ecológica. O morador que separa e entrega resíduos limpos recebe remuneração direta por quilo.
+                  </p>
+                  <ul class="proposal-key-points">
+                    <li><span class="bullet">✓</span> Retorno financeiro tangível ao morador engajado</li>
+                    <li><span class="bullet">✓</span> 100% da margem institucional aplicada em jardinagem</li>
+                    <li><span class="bullet">✓</span> Fim do descarte irregular e proliferação de vetores</li>
+                  </ul>
+                  <button type="button" class="btn-open-proposal-card" data-modal-title="Card Oficial: Recicla Villa" data-modal-src="assets/images/cards/card_3_recicla_villa.webp" data-modal-download="assets/images/cards/card_3_recicla_villa.png">
+                    🔍 Ver Card Completo
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4. Guarda-Barcos -->
+            <div class="carousel-slide" data-slide-index="4">
+              <div class="proposal-card">
+                <div class="proposal-card-thumb-wrap">
+                  <img src="assets/images/cards/card_4_guarda_barcos.webp" alt="Guarda Barcos" class="proposal-card-thumb" loading="lazy">
+                  <span class="proposal-tag-badge">⚓ NÁUTICA ESTRUTURADA</span>
+                </div>
+                <div class="proposal-card-body">
+                  <h3 class="proposal-title">Guarda-Barcos & Apoio Náutico Seguro</h3>
+                  <div class="proposal-tagline">Estrutura Monitorada 24h & Ponto de Lavagem</div>
+                  <p class="proposal-desc">
+                    Espaço cercado, monitorado por câmeras e ordenado para guardar embarcações e jet-skis com segurança, retirando carretas das ruas e calçadas.
+                  </p>
+                  <ul class="proposal-key-points">
+                    <li><span class="bullet">✓</span> Monitoramento 24h e controle de acesso rígido</li>
+                    <li><span class="bullet">✓</span> Ponto de água tratada para lavagem rápida (Boat Wash)</li>
+                    <li><span class="bullet">✓</span> Liberação das vias internas e calçadas residenciais</li>
+                  </ul>
+                  <button type="button" class="btn-open-proposal-card" data-modal-title="Card Oficial: Guarda-Barcos Estruturado" data-modal-src="assets/images/cards/card_4_guarda_barcos.webp" data-modal-download="assets/images/cards/card_4_guarda_barcos.png">
+                    🔍 Ver Card Completo
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5. Acessibilidade -->
+            <div class="carousel-slide" data-slide-index="5">
+              <div class="proposal-card">
+                <div class="proposal-card-thumb-wrap">
+                  <img src="assets/images/cards/card_5_acessibilidade.webp" alt="Acessibilidade e Inclusão" class="proposal-card-thumb" loading="lazy">
+                  <span class="proposal-tag-badge">♿ INCLUSÃO SOCIAL</span>
+                </div>
+                <div class="proposal-card-body">
+                  <h3 class="proposal-title">Acessibilidade & Espaço Sensorial TEA</h3>
+                  <div class="proposal-tagline">Dignidade para Idosos e Crianças Atípicas</div>
+                  <p class="proposal-desc">
+                    Adequação das áreas comuns com rampas suaves (NBR 9050) e criação de um ambiente com estímulos acolhedores para pessoas no Espectro Autista.
+                  </p>
+                  <ul class="proposal-key-points">
+                    <li><span class="bullet">✓</span> Rampas acessíveis na portaria, quiosques e acesso ao lago</li>
+                    <li><span class="bullet">✓</span> Espaço sensorial tranquilo para descompressão TEA</li>
+                    <li><span class="bullet">✓</span> Condomínio humano, seguro e inclusivo para todas as idades</li>
+                  </ul>
+                  <button type="button" class="btn-open-proposal-card" data-modal-title="Card Oficial: Acessibilidade & Espaço Sensorial" data-modal-src="assets/images/cards/card_5_acessibilidade.webp" data-modal-download="assets/images/cards/card_5_acessibilidade.png">
+                    🔍 Ver Card Completo
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6. Equipe & Governança -->
+            <div class="carousel-slide" data-slide-index="6">
+              <div class="proposal-card">
+                <div class="proposal-card-thumb-wrap">
+                  <img src="assets/images/cards/card_6_equipe_oficial.webp" alt="Equipe e Governança Oficial" class="proposal-card-thumb" loading="lazy">
+                  <span class="proposal-tag-badge">👥 GOVERNANÇA PARTICIPATIVA</span>
+                </div>
+                <div class="proposal-card-body">
+                  <h3 class="proposal-title">Organograma Oficial & Gestão Integrada</h3>
+                  <div class="proposal-tagline">Sinergia entre Diretoria, Conselho e Moradores</div>
+                  <p class="proposal-desc">
+                    Estrutura profissional com atribuições claras, assembleias participativas e comunicação transparente via aplicativo oficial sem burocracia.
+                  </p>
+                  <ul class="proposal-key-points">
+                    <li><span class="bullet">✓</span> Tomada de decisão democrática e participativa</li>
+                    <li><span class="bullet">✓</span> Prestação de contas aberta mensalmente a todos os condôminos</li>
+                    <li><span class="bullet">✓</span> Lideranças presentes no dia a dia do condomínio</li>
+                  </ul>
+                  <button type="button" class="btn-open-proposal-card" data-modal-title="Card Oficial: Organograma & Equipe" data-modal-src="assets/images/cards/card_6_equipe_oficial.webp" data-modal-download="assets/images/cards/card_6_equipe_oficial.png">
+                    🔍 Ver Card Completo
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 7. Rigor Financeiro -->
+            <div class="carousel-slide" data-slide-index="7">
+              <div class="proposal-card">
+                <div class="proposal-card-thumb-wrap">
+                  <img src="assets/images/cards/card_7_diretrizes_financeiras.webp" alt="Diretrizes Financeiras" class="proposal-card-thumb" loading="lazy">
+                  <span class="proposal-tag-badge">📊 GESTÃO FINANCEIRA</span>
+                </div>
+                <div class="proposal-card-body">
+                  <h3 class="proposal-title">Transparência & Cotação Tríplice</h3>
+                  <div class="proposal-tagline">Zelo Absoluto por Cada Centavo da Taxa</div>
+                  <p class="proposal-desc">
+                    Prestação de contas mensal transparente e digital, com auditoria permanente do Conselho Fiscal e proibição expressa de despesas sem orçamentos comparativos.
+                  </p>
+                  <ul class="proposal-key-points">
+                    <li><span class="bullet">✓</span> Obrigatoriedade de 3 cotações para qualquer compra ou serviço</li>
+                    <li><span class="bullet">✓</span> Balancete mensal acessível em tempo real por aplicativo</li>
+                    <li><span class="bullet">✓</span> Combate preventivo a aumentos abusivos de taxa condominial</li>
+                  </ul>
+                  <button type="button" class="btn-open-proposal-card" data-modal-title="Card Oficial: Diretrizes Financeiras" data-modal-src="assets/images/cards/card_7_diretrizes_financeiras.webp" data-modal-download="assets/images/cards/card_7_diretrizes_financeiras.png">
+                    🔍 Ver Card Completo
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 8. Plano Consolidado -->
+            <div class="carousel-slide" data-slide-index="8">
+              <div class="proposal-card">
+                <div class="proposal-card-thumb-wrap">
+                  <img src="assets/images/cards/card_8_plano_consolidado.webp" alt="Plano Consolidado de Governo" class="proposal-card-thumb" loading="lazy">
+                  <span class="proposal-tag-badge">📜 PLANEJAMENTO ESTRATÉGICO</span>
+                </div>
+                <div class="proposal-card-body">
+                  <h3 class="proposal-title">Plano Consolidado & Valorização</h3>
+                  <div class="proposal-tagline">10 Eixos de Metas e Planejamento Real</div>
+                  <p class="proposal-desc">
+                    Consolidação técnica de 10 eixos de desenvolvimento para valorização imobiliária imediata de todos os lotes e casas do condomínio.
+                  </p>
+                  <ul class="proposal-key-points">
+                    <li><span class="bullet">✓</span> Metas com cronograma físico e orçamentário definido</li>
+                    <li><span class="bullet">✓</span> Cobrança técnica firme perante Equatorial e Construtora</li>
+                    <li><span class="bullet">✓</span> Execução com fiscalização comunitária permanente</li>
+                  </ul>
+                  <button type="button" class="btn-open-proposal-card" data-modal-title="Card Oficial: Plano Consolidado" data-modal-src="assets/images/cards/card_8_plano_consolidado.webp" data-modal-download="assets/images/cards/card_8_plano_consolidado.png">
+                    🔍 Ver Card Completo
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- 3. Recicla Villa -->
-        <div class="proposal-card">
-          <div class="proposal-card-thumb-wrap">
-            <img src="assets/images/cards/card_3_recicla_villa.webp" alt="Recicla Villa" class="proposal-card-thumb" loading="lazy">
-            <span class="proposal-tag-badge">♻️ ECONOMIA CIRCULAR</span>
-          </div>
-          <div class="proposal-card-body">
-            <h3 class="proposal-title">Recicla Villa: Gestão de Resíduos</h3>
-            <div class="proposal-tagline">R$ 3,00 /kg Pago Direto ao Morador Participante</div>
-            <p class="proposal-desc">
-              Programa moderno de coleta seletiva e valorização ecológica. O morador que separa e entrega resíduos limpos recebe remuneração direta por quilo.
-            </p>
-            <ul class="proposal-key-points">
-              <li><span class="bullet">✓</span> Retorno financeiro tangível ao morador engajado</li>
-              <li><span class="bullet">✓</span> 100% da margem institucional aplicada em jardinagem e melhorias</li>
-              <li><span class="bullet">✓</span> Fim do descarte irregular e proliferação de vetores</li>
-            </ul>
-            <button type="button" class="btn-open-proposal-card" data-modal-title="Card Oficial: Recicla Villa" data-modal-src="assets/images/cards/card_3_recicla_villa.webp" data-modal-download="assets/images/cards/card_3_recicla_villa.png">
-              🔍 Ver Card Completo
-            </button>
-          </div>
-        </div>
-
-        <!-- 4. Guarda-Barcos -->
-        <div class="proposal-card">
-          <div class="proposal-card-thumb-wrap">
-            <img src="assets/images/cards/card_4_guarda_barcos.webp" alt="Guarda Barcos" class="proposal-card-thumb" loading="lazy">
-            <span class="proposal-tag-badge">⚓ NÁUTICA ESTRUTURADA</span>
-          </div>
-          <div class="proposal-card-body">
-            <h3 class="proposal-title">Guarda-Barcos & Apoio Náutico Seguro</h3>
-            <div class="proposal-tagline">Estrutura Monitorada 24h & Ponto de Lavagem</div>
-            <p class="proposal-desc">
-              Espaço cercado, monitorado por câmeras e ordenado para guardar embarcações e jet-skis com segurança, retirando carretas das ruas e calçadas.
-            </p>
-            <ul class="proposal-key-points">
-              <li><span class="bullet">✓</span> Monitoramento 24h e controle de acesso rígido</li>
-              <li><span class="bullet">✓</span> Ponto de água tratada para lavagem rápida (Boat Wash)</li>
-              <li><span class="bullet">✓</span> Liberação das vias internas e garagens das residências</li>
-            </ul>
-            <button type="button" class="btn-open-proposal-card" data-modal-title="Card Oficial: Guarda-Barcos Estruturado" data-modal-src="assets/images/cards/card_4_guarda_barcos.webp" data-modal-download="assets/images/cards/card_4_guarda_barcos.png">
-              🔍 Ver Card Completo
-            </button>
-          </div>
-        </div>
-
-        <!-- 5. Acessibilidade -->
-        <div class="proposal-card">
-          <div class="proposal-card-thumb-wrap">
-            <img src="assets/images/cards/card_5_acessibilidade.webp" alt="Acessibilidade e Inclusão" class="proposal-card-thumb" loading="lazy">
-            <span class="proposal-tag-badge">♿ INCLUSÃO SOCIAL</span>
-          </div>
-          <div class="proposal-card-body">
-            <h3 class="proposal-title">Acessibilidade & Espaço Sensorial TEA</h3>
-            <div class="proposal-tagline">Dignidade para Idosos e Crianças Atípicas</div>
-            <p class="proposal-desc">
-              Adequação das áreas comuns com rampas suaves (NBR 9050) e criação de um ambiente com estímulos acolhedores para pessoas no Espectro Autista.
-            </p>
-            <ul class="proposal-key-points">
-              <li><span class="bullet">✓</span> Rampas acessíveis na portaria, quiosques e acesso ao lago</li>
-              <li><span class="bullet">✓</span> Espaço sensorial tranquilo para descompressão e acolhimento TEA</li>
-              <li><span class="bullet">✓</span> Condomínio humano, seguro e inclusivo para todas as idades</li>
-            </ul>
-            <button type="button" class="btn-open-proposal-card" data-modal-title="Card Oficial: Acessibilidade & Espaço Sensorial" data-modal-src="assets/images/cards/card_5_acessibilidade.webp" data-modal-download="assets/images/cards/card_5_acessibilidade.png">
-              🔍 Ver Card Completo
-            </button>
-          </div>
-        </div>
-
-        <!-- 6. Rigor Financeiro -->
-        <div class="proposal-card">
-          <div class="proposal-card-thumb-wrap">
-            <img src="assets/images/cards/card_7_diretrizes_financeiras.webp" alt="Diretrizes Financeiras" class="proposal-card-thumb" loading="lazy">
-            <span class="proposal-tag-badge">📊 GESTÃO FINANCEIRA</span>
-          </div>
-          <div class="proposal-card-body">
-            <h3 class="proposal-title">Transparência & Cotação Tríplice</h3>
-            <div class="proposal-tagline">Zelo Absoluto por Cada Centavo da Taxa</div>
-            <p class="proposal-desc">
-              Prestação de contas mensal transparente e digital, com auditoria permanente do Conselho Fiscal e proibição expressa de despesas sem orçamentos comparativos.
-            </p>
-            <ul class="proposal-key-points">
-              <li><span class="bullet">✓</span> Obrigatoriedade de 3 cotações para qualquer compra ou serviço</li>
-              <li><span class="bullet">✓</span> Balancete mensal acessível em tempo real por aplicativo</li>
-              <li><span class="bullet">✓</span> Combate preventivo a aumentos abusivos de taxa condominial</li>
-            </ul>
-            <button type="button" class="btn-open-proposal-card" data-modal-title="Card Oficial: Diretrizes Financeiras" data-modal-src="assets/images/cards/card_7_diretrizes_financeiras.webp" data-modal-download="assets/images/cards/card_7_diretrizes_financeiras.png">
-              🔍 Ver Card Completo
-            </button>
-          </div>
+        <!-- Carousel Dots Indicator (8 Dots) -->
+        <div class="carousel-dots" id="proposalsCarouselDots" aria-label="Navegação pelas propostas">
+          <button type="button" class="carousel-dot active" data-index="0" aria-label="Ir para Proposta 1: Minimercado"></button>
+          <button type="button" class="carousel-dot" data-index="1" aria-label="Ir para Proposta 2: Baias de Lazer"></button>
+          <button type="button" class="carousel-dot" data-index="2" aria-label="Ir para Proposta 3: Recicla Villa"></button>
+          <button type="button" class="carousel-dot" data-index="3" aria-label="Ir para Proposta 4: Guarda-Barcos"></button>
+          <button type="button" class="carousel-dot" data-index="4" aria-label="Ir para Proposta 5: Acessibilidade"></button>
+          <button type="button" class="carousel-dot" data-index="5" aria-label="Ir para Proposta 6: Equipe e Governança"></button>
+          <button type="button" class="carousel-dot" data-index="6" aria-label="Ir para Proposta 7: Diretrizes Financeiras"></button>
+          <button type="button" class="carousel-dot" data-index="7" aria-label="Ir para Proposta 8: Plano Consolidado"></button>
         </div>
       </div>
     </div>

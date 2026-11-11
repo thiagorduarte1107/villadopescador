@@ -333,6 +333,152 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 3200);
   }
 
+  // ==========================================
+  // 8. MODERN UNIVERSAL CAROUSEL CONTROLLER
+  // ==========================================
+  function initModernCarousel({ wrapperId, trackId, prevBtnId, nextBtnId, dotsId, counterId }) {
+    const wrapper = document.getElementById(wrapperId);
+    if (!wrapper) return;
+
+    const track = document.getElementById(trackId);
+    const btnPrev = document.getElementById(prevBtnId);
+    const btnNext = document.getElementById(nextBtnId);
+    const dotsContainer = document.getElementById(dotsId);
+    const counter = document.getElementById(counterId);
+
+    if (!track) return;
+
+    const slides = Array.from(track.querySelectorAll('.carousel-slide'));
+    const dots = dotsContainer ? Array.from(dotsContainer.querySelectorAll('.carousel-dot')) : [];
+    const totalSlides = slides.length;
+    let currentIndex = 0;
+    let isScrolling = false;
+
+    if (counter) {
+      const totalEl = counter.querySelector('.carousel-total');
+      if (totalEl) totalEl.textContent = totalSlides;
+    }
+
+    function updateControls() {
+      // Update counter
+      if (counter) {
+        const curEl = counter.querySelector('.carousel-current');
+        if (curEl) curEl.textContent = currentIndex + 1;
+      }
+
+      // Update Prev / Next buttons
+      if (btnPrev) btnPrev.disabled = (currentIndex === 0);
+      if (btnNext) btnNext.disabled = (currentIndex === totalSlides - 1);
+
+      // Update dots
+      dots.forEach((dot, idx) => {
+        if (idx === currentIndex) {
+          dot.classList.add('active');
+          dot.setAttribute('aria-selected', 'true');
+        } else {
+          dot.classList.remove('active');
+          dot.setAttribute('aria-selected', 'false');
+        }
+      });
+    }
+
+    function goToSlide(index) {
+      if (index < 0) index = 0;
+      if (index >= totalSlides) index = totalSlides - 1;
+      currentIndex = index;
+
+      const targetSlide = slides[currentIndex];
+      if (targetSlide) {
+        targetSlide.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+      }
+
+      updateControls();
+    }
+
+    if (btnPrev) {
+      btnPrev.addEventListener('click', () => {
+        goToSlide(currentIndex - 1);
+      });
+    }
+
+    if (btnNext) {
+      btnNext.addEventListener('click', () => {
+        goToSlide(currentIndex + 1);
+      });
+    }
+
+    dots.forEach((dot, idx) => {
+      dot.addEventListener('click', () => {
+        goToSlide(idx);
+      });
+    });
+
+    // Sync active slide on native touch swipe or scroll snap
+    let scrollTimeout = null;
+    track.addEventListener('scroll', () => {
+      if (scrollTimeout) cancelAnimationFrame(scrollTimeout);
+      scrollTimeout = requestAnimationFrame(() => {
+        const scrollLeft = track.scrollLeft;
+        const maxScroll = track.scrollWidth - track.clientWidth;
+
+        let closestIndex = 0;
+        if (maxScroll > 0 && scrollLeft >= maxScroll - 20) {
+          closestIndex = totalSlides - 1;
+        } else if (scrollLeft <= 20) {
+          closestIndex = 0;
+        } else {
+          let minDiff = Infinity;
+          slides.forEach((slide, idx) => {
+            const diff = Math.abs((slide.offsetLeft - track.offsetLeft) - scrollLeft);
+            if (diff < minDiff) {
+              minDiff = diff;
+              closestIndex = idx;
+            }
+          });
+        }
+
+        if (closestIndex !== currentIndex) {
+          currentIndex = closestIndex;
+          updateControls();
+        }
+      });
+    }, { passive: true });
+
+    // Keyboard navigation when track is focused
+    track.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        goToSlide(currentIndex + 1);
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        goToSlide(currentIndex - 1);
+      }
+    });
+
+    // Initial controls state
+    updateControls();
+  }
+
+  // Initialize Proposals Carousel (8 Cards)
+  initModernCarousel({
+    wrapperId: 'proposalsCarouselWrapper',
+    trackId: 'proposalsCarouselTrack',
+    prevBtnId: 'btnPropPrev',
+    nextBtnId: 'btnPropNext',
+    dotsId: 'proposalsCarouselDots',
+    counterId: 'proposalsCarouselCounter'
+  });
+
+  // Initialize Team / Corpo Diretivo Carousel (7 Members)
+  initModernCarousel({
+    wrapperId: 'teamCarouselWrapper',
+    trackId: 'teamCarouselTrack',
+    prevBtnId: 'btnTeamPrev',
+    nextBtnId: 'btnTeamNext',
+    dotsId: 'teamCarouselDots',
+    counterId: 'teamCarouselCounter'
+  });
+
   // Initial call to set active page 1
   updatePdfViewer(1);
 });

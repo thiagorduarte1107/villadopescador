@@ -113,8 +113,8 @@ a, button, [role="button"], .pdf-toc-item, [data-modal-src] {
 
 body {
   overflow-x: hidden;
-  background: radial-gradient(circle at 50% 0%, #032b14 0%, #01160b 45%, #010f07 100%);
-  background-attachment: fixed;
+  /* O gradiente de fundo vive na camada fixa .hero-bg-scenery — manter um
+     fundo opaco aqui cobriria o z-index:-1 e esconderia o cenario */
   line-height: 1.6;
   min-height: 100vh;
   padding-bottom: 70px; /* Space for mobile bottom bar */
@@ -390,13 +390,16 @@ button {
   }
 }
 
-/* Cenário de fundo FIXO: cobre a viewport inteira (topo ao rodapé),
-   atrás de todo o conteúdo — posição fixed escapa do overflow do hero. */
+/* Cenário de fundo FIXO: cobre a viewport inteira (topo ao rodapé), atrás
+   de todo o conteúdo. O gradiente escuro do body vive aqui — a "opacidade"
+   da imagem é simulada por um veu escuro sobre ela, mantendo a base opaca. */
 .hero-bg-scenery {
   position: fixed;
   inset: 0;
-  background: url('../images/candidates/hero_scenery.webp') center top / cover no-repeat;
-  opacity: 0.16;
+  background:
+    linear-gradient(rgba(1, 15, 7, 0.84), rgba(1, 15, 7, 0.84)),
+    url('../images/candidates/hero_scenery.webp') center top / cover no-repeat,
+    radial-gradient(circle at 50% 0%, #032b14 0%, #01160b 45%, #010f07 100%);
   filter: saturate(1.2);
   z-index: -1;
   pointer-events: none;
